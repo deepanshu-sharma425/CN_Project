@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+X-Backend: A
+Cache-Control: public, max-age=60
+ETag: "abe0f97674562f0dbaee165957d92bab747dd23d"
+Content-Type: text/html; charset=utf-8
+Content-Length: 168
+Date: Fri, 02 Oct 2026 19:24:22 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Backend A</title></head>
+<body><h1>Backend A</h1><p>Served by Backend A on Mac 3, port 3001.</p></body></html>

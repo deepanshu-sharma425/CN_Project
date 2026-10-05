@@ -1,0 +1,2 @@
+COMMAND   PID             USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+node    87842 kanishk.personal   12u  IPv4 0xe7833e8089b820d4      0t0  TCP *:3001 (LISTEN)

@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+X-Backend: A
+Content-Type: application/json
+Cache-Control: no-store
+Content-Length: 136
+Date: Fri, 02 Oct 2026 19:24:24 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"backend":"A","status":"ok","hostname":"Kanishks-MacBook-Pro-2.local","port":3001,"uptimeSeconds":6,"time":"2026-10-02T19:24:24.142Z"}

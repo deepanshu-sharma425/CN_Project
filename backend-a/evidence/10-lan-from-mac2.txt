@@ -1,0 +1,27 @@
+deepanshu.@Deepanshus-MacBook-Pro-3 ~ % ipconfig getifaddr en0
+curl -si http://10.7.2.229:3001/
+curl -si http://10.7.2.229:3001/api/status
+10.7.7.58
+HTTP/1.1 200 OK
+X-Backend: A
+Cache-Control: public, max-age=60
+ETag: "abe0f97674562f0dbaee165957d92bab747dd23d"
+Content-Type: text/html; charset=utf-8
+Content-Length: 168
+Date: Fri, 02 Oct 2026 19:25:57 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Backend A</title></head>
+<body><h1>Backend A</h1><p>Served by Backend A on Mac 3, port 3001.</p></body></html>
+HTTP/1.1 200 OK
+X-Backend: A
+Content-Type: application/json
+Cache-Control: no-store
+Content-Length: 138
+Date: Fri, 02 Oct 2026 19:25:57 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"backend":"A","status":"ok","hostname":"Kanishks-MacBook-Pro-2.local","port":3001,"uptimeSeconds":100,"time":"2026-10-02T19:25:57.841Z"}
