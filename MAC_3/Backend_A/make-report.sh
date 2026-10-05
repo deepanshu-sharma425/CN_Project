@@ -1,7 +1,7 @@
 #!/bin/bash
 # Builds EVIDENCE.md from the real command output saved in evidence/*.txt
 DIR="$(cd "$(dirname "$0")" && pwd)"
-EV="$DIR/evidence"
+EV="$DIR/../evidence"
 OUT="$DIR/EVIDENCE.md"
 block() {  # title, command shown, file, what it proves
   echo "## $1"; echo; echo "Proves: $4"; echo; echo '```'; echo "\$ $2"

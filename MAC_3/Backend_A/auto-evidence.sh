@@ -1,8 +1,8 @@
 #!/bin/bash
 # Backend A - one command, no key presses: restart, test, save output, screenshot, report.
-# Run on Mac 3 with:  bash ~/cn-project/backend-a/auto-evidence.sh     (safe to repeat)
+# Run on Mac 3 with:  bash MAC_3/Backend_A/auto-evidence.sh     (safe to repeat)
 DIR="$(cd "$(dirname "$0")" && pwd)"
-IP="${BACKEND_IP:-10.7.2.229}"; PORT=3001; URL="http://$IP:$PORT"; EV="$DIR/evidence"
+IP="${BACKEND_IP:-10.7.2.229}"; PORT=3001; URL="http://$IP:$PORT"; EV="$DIR/../evidence"
 mkdir -p "$EV"; cd "$DIR" || exit 1
 SHOTS_OK=0; SHOTS_FAIL=0
 shot() {  # capture the screen as evidence/<name>.png, without any key press

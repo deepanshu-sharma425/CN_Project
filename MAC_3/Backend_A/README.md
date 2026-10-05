@@ -7,7 +7,7 @@ Owner: Kanishk. Plain HTTP backend with HTTP caching. No dependencies (Node buil
 - Reached directly at http://10.7.19.171:3001, and through Mac 2 nginx (10.7.7.58)
 
 Note on IP addresses: Mac 3 gets its address by DHCP. It was 10.7.2.229 when the
-captures in `evidence/`, `EVIDENCE.md` and `HANDOFF.md` were taken on 2 October, and
+text captures in `../evidence/`, `EVIDENCE.md` and `HANDOFF.md` were taken on 2 October, and
 10.7.19.171 for the final setup on 5 October. Those files are left as captured. The
 evidence scripts default to the old address; run them with `BACKEND_IP=10.7.19.171`.
 
@@ -16,15 +16,16 @@ evidence scripts default to the old address; run them with `BACKEND_IP=10.7.19.1
 From the repository root:
 
     cd MAC_3/Backend_A
-    pkill -f backend-a/server.js; sleep 1
+    lsof -ti tcp:3001 -sTCP:LISTEN | xargs kill; sleep 1
     nohup node server.js >> server.log 2>&1 &
 
-The `pkill` line stops any copy already running, so this is safe to run at any time.
-Starting a second copy without it fails with EADDRINUSE. The log is appended to, so earlier requests are kept.
+The `lsof ... | xargs kill` line stops any copy already listening on port 3001, so this
+is safe to run at any time. Starting a second copy without it fails with EADDRINUSE.
+The log is appended to, so earlier requests are kept.
 
 Check: `lsof -nP -iTCP:3001 -sTCP:LISTEN`
 Log:   `cat server.log`
-Stop:  `pkill -f backend-a/server.js`
+Stop:  `lsof -ti tcp:3001 -sTCP:LISTEN | xargs kill`
 
 ## Endpoints
 
@@ -44,4 +45,5 @@ Stop:  `pkill -f backend-a/server.js`
 
 ## Evidence
 
-Saved curl output is in `evidence/` (04-listen through 09-no-store). Screenshots go alongside.
+Saved curl output is in `../evidence/` (04-listen through 11-server-log-remote-ip).
+Screenshots from the final setup on 5 October are in `../evidence/mac-3_ss/`.

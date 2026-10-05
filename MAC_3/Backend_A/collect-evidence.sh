@@ -1,13 +1,13 @@
 #!/bin/bash
 # Backend A - restart the server, run every test, and collect evidence.
-# Run on Mac 3 with:  bash ~/cn-project/backend-a/collect-evidence.sh
+# Run on Mac 3 with:  bash MAC_3/Backend_A/collect-evidence.sh
 # Safe to run as many times as you like.
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 IP="${BACKEND_IP:-10.7.2.229}"
 PORT=3001
 URL="http://$IP:$PORT"
-EV="$DIR/evidence"
+EV="$DIR/../evidence"
 mkdir -p "$EV"
 cd "$DIR" || exit 1
 
