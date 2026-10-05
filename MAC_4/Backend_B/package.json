@@ -1,0 +1,9 @@
+{
+  "name": "backend-b",
+  "version": "1.0.0",
+  "description": "Backend B - Computer Networks Phase 1 (Mac 4)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
