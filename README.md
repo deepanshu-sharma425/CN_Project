@@ -46,7 +46,8 @@ Each backend serves `/` and `/api/status` and labels every response with an
 | `MAC_1/evidence/`           | Mac 1 evidence and DNS packet capture    |
 | `nginx/nova.conf`           | nginx virtual host used on Mac 2         |
 | `MAC_2/`                    | Screenshots taken on Mac 2               |
-| `MAC_3/backend-a/`          | Backend A server (Mac 3) and its evidence |
+| `MAC_3/Backend_A/`          | Backend A server (Mac 3)                 |
+| `MAC_3/evidence/`           | Mac 3 evidence and captures              |
 | `MAC_4/Backend_B/`          | Backend B server (Mac 4)                 |
 | `MAC_4/evidence/`           | Screenshots taken on Mac 4               |
 
