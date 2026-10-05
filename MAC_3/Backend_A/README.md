@@ -15,7 +15,7 @@ evidence scripts default to the old address; run them with `BACKEND_IP=10.7.19.1
 
 From the repository root:
 
-    cd MAC_3/backend-a
+    cd MAC_3/Backend_A
     pkill -f backend-a/server.js; sleep 1
     nohup node server.js >> server.log 2>&1 &
 
