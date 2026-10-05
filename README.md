@@ -43,10 +43,10 @@ Each backend serves `/` and `/api/status` and labels every response with an
 | Path                        | Contents                                 |
 |-----------------------------|------------------------------------------|
 | `MAC_1/dnsmasq.conf`        | dnsmasq config used on Mac 1             |
-| `MAC_1/screenshots/`        | Mac 1 evidence and DNS packet capture    |
+| `MAC_1/evidence/`           | Mac 1 evidence and DNS packet capture    |
 | `nginx/nova.conf`           | nginx virtual host used on Mac 2         |
 | `MAC_2/`                    | Screenshots taken on Mac 2               |
-| `backend-a/`                | Backend A server (Mac 3) and its evidence |
+| `MAC_3/backend-a/`          | Backend A server (Mac 3) and its evidence |
 | `MAC_4/Backend_B/`          | Backend B server (Mac 4)                 |
 | `MAC_4/evidence/`           | Screenshots taken on Mac 4               |
 
