@@ -1,0 +1,6 @@
+# TLS private keys and certificates must never be committed
+*.pem
+*-key.pem
+
+# macOS
+.DS_Store
