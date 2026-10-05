@@ -47,7 +47,12 @@ curl -v https://app.nova.test/
 ## Trust
 
 - The certificate is signed by the local `mkcert` Root CA (`rootCA.pem`).
-- For participating client machines (e.g., Mac 1, Mac 3, Mac 4) to verify HTTPS connections without certificate warnings, the public `rootCA.pem` from Mac 2 must be trusted in their local certificate trust stores or macOS Keychain (`mkcert -install` or `security add-trusted-cert`).
+- The public root certificate (no private key) is in this repository at `MAC_2/certs/mkcert-rootCA.crt`. It is a copy of `rootCA.pem`, named `.crt` because `.gitignore` excludes `*.pem`.
+- For participating client machines (e.g., Mac 1, Mac 3, Mac 4) to verify HTTPS connections without certificate warnings, that root certificate must be trusted in their macOS Keychain. From the repository root on the client machine:
+
+```bash
+sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain MAC_2/certs/mkcert-rootCA.crt
+```
 
 ## Security
 

@@ -10,7 +10,7 @@ and two backends behind a round-robin load balancer.
 | 2401010144  | Deepanshu          | Mac 2   | nginx edge (TLS, load balancer) |
 | 2401010207  | Kanishk Sharma     | Mac 3   | Backend A                       |
 | 2401020027  | Hrishabh Prajapati | Mac 1   | DNS (dnsmasq)                   |
-| 2401010026  | Adarsh             | Mac 4   | Backend B                       |
+| 2401010026  | Adarsh Vashistha   | Mac 4   | Backend B                       |
 
 ## Architecture
 
@@ -40,16 +40,18 @@ Each backend serves `/` and `/api/status` and labels every response with an
 
 ## Repository layout
 
-| Path                        | Contents                                 |
-|-----------------------------|------------------------------------------|
-| `MAC_1/dnsmasq.conf`        | dnsmasq config used on Mac 1             |
-| `MAC_1/evidence/`           | Mac 1 evidence and DNS packet capture    |
-| `nginx/nova.conf`           | nginx virtual host used on Mac 2         |
-| `MAC_2/`                    | Screenshots taken on Mac 2               |
-| `MAC_3/Backend_A/`          | Backend A server (Mac 3)                 |
-| `MAC_3/evidence/`           | Mac 3 evidence and captures              |
-| `MAC_4/Backend_B/`          | Backend B server (Mac 4)                 |
-| `MAC_4/evidence/`           | Screenshots taken on Mac 4               |
+| Path                        | Contents                                            |
+|-----------------------------|-----------------------------------------------------|
+| `MAC_1/dnsmasq.conf`        | dnsmasq config used on Mac 1                        |
+| `MAC_1/evidence/`           | Mac 1 evidence and DNS packet capture               |
+| `nginx/nova.conf`           | nginx virtual host used on Mac 2                    |
+| `MAC_2/`                    | Screenshots taken on Mac 2                          |
+| `MAC_2/tls/`                | TLS setup notes                                     |
+| `MAC_2/certs/`              | Public mkcert root certificate                      |
+| `MAC_3/Backend_A/`          | Backend A server (Mac 3)                            |
+| `MAC_3/evidence/`           | Mac 3 evidence and captures                         |
+| `MAC_4/Backend_B/`          | Backend B server (Mac 4)                            |
+| `MAC_4/evidence/`           | Screenshots taken on Mac 4 and a TLS packet capture |
 
 TLS private keys are not in this repository; `.gitignore` excludes `*.pem`.
 
@@ -63,7 +65,7 @@ The backends use only Node.js built-ins, so there is nothing to install.
 
 Backend A, on Mac 3 (listens on port 3001):
 
-    cd backend-a && node server.js
+    cd MAC_3/Backend_A && node server.js
 
 Backend B, on Mac 4 (listens on port 3002):
 
