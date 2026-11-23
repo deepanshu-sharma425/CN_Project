@@ -1,115 +1,125 @@
 {
   "schema": 1,
-  "asOf": "2026-11-23T17:56:00+05:30",
-  "source": "Coordinator (Kanishk, Mac 3) after CP0. Inventory values are NOT VERIFIED until S0.",
-  "currentStage": "S0",
-  "nextMilestone": "CP0P push policy for origin/phase2, then the S0 inventory on all four Macs",
+  "asOf": "2026-11-23T19:50:00+05:30",
+  "source": "Coordinator (Kanishk, Mac 3): S0 inventory and CP1 completed; screenshots relayed from Macs 1, 2, 4.",
+  "currentStage": "S1",
+  "nextMilestone": "S1: CA trust on Mac 1 and Mac 3, HTTP/2 on Mac 2, three missing Phase 1 failure demos",
   "inventory": {
     "mac1": {
-      "ip": null,
-      "note": "Phase 1: 10.7.8.113. No ping reply from Mac 3 on 23 Nov."
+      "ip": "10.7.22.124",
+      "note": "verified 23 Nov 19:30; dnsmasq rebound after CP1"
     },
     "mac2": {
-      "ip": null,
-      "note": "Phase 1: 10.7.7.58. No ping reply from Mac 3 on 23 Nov."
+      "ip": "10.7.5.201",
+      "note": "verified 23 Nov 19:31"
     },
     "mac3": {
-      "ip": null,
-      "note": "Seen as 10.7.1.218 on 23 Nov (not an S0 value). Repo says 10.7.19.171."
+      "ip": "10.7.1.218",
+      "note": "verified 23 Nov 19:27"
     },
     "mac4": {
-      "ip": null,
-      "note": "Phase 1: 10.7.20.75. No ping reply from Mac 3 on 23 Nov."
+      "ip": "10.7.27.160",
+      "note": "verified 23 Nov 19:30; Docker container on 3002 stopped"
     }
   },
   "members": {
     "hrishabh": {
       "mac": "Mac 1",
-      "stage": "S0",
-      "task": "Waiting for CP0",
-      "status": "Not started",
-      "latestTest": "None in Phase 2",
+      "stage": "S1",
+      "task": "S0 + CP1 done (dnsmasq rebound to 10.7.22.124)",
+      "status": "Passed",
+      "latestTest": "dig @10.7.22.124 → 10.7.5.201",
       "evidence": [],
       "commit": null,
       "blockers": [],
-      "next": "S0 read-only inventory once phase2 is available",
-      "updated": "2026-11-23"
+      "next": "S1: trust team CA on Mac 1",
+      "updated": "2026-11-23T19:46:00+05:30"
     },
     "deepanshu": {
       "mac": "Mac 2",
-      "stage": "S0",
-      "task": "Waiting for CP0",
-      "status": "Not started",
-      "latestTest": "None in Phase 2",
+      "stage": "S1",
+      "task": "S0 + CP1 done (upstream updated)",
+      "status": "Passed",
+      "latestTest": "nginx -t ok, reloaded",
       "evidence": [],
       "commit": null,
       "blockers": [],
-      "next": "S0 read-only inventory; confirm push access for CP0P",
-      "updated": "2026-11-23"
+      "next": "S1: http2 on; error-log capture during demos",
+      "updated": "2026-11-23T19:47:00+05:30"
     },
     "kanishk": {
       "mac": "Mac 3",
-      "stage": "S0",
-      "task": "CP0 done: phase2 branch and scaffold (local, not pushed)",
-      "status": "Waiting for approval",
-      "latestTest": "Read-only audit 23 Nov",
+      "stage": "S1",
+      "task": "S0 + CP1 done; Backend A running",
+      "status": "Passed",
+      "latestTest": "Backend A 200; app.nova.test → 10.7.5.201",
       "evidence": [],
       "commit": null,
       "blockers": [
-        "Mac 3 DNS list is 10.7.8.113, 1.1.1.1, 8.8.8.8; cached negative answer for app.nova.test (TTL 108002 s)",
-        "Mac 3 does not trust the team CA (CSSMERR_TP_NOT_TRUSTED)"
+        "Mac 3 does not trust the team CA yet (S1)"
       ],
-      "next": "CP0P: decide push policy, then push phase2",
-      "updated": "2026-11-23T17:56:00+05:30"
+      "next": "S1: trust team CA on Mac 3; stop/start A for demos",
+      "updated": "2026-11-23T19:48:00+05:30"
     },
     "adarsh": {
       "mac": "Mac 4",
-      "stage": "S0",
-      "task": "Waiting for CP0",
-      "status": "Not started",
-      "latestTest": "None in Phase 2",
+      "stage": "S1",
+      "task": "S0 + CP1 done; Backend B running",
+      "status": "Passed",
+      "latestTest": "6 requests from Mac 4: 200, A/B alternating",
       "evidence": [],
       "commit": null,
       "blockers": [],
-      "next": "S0 read-only inventory once phase2 is available",
-      "updated": "2026-11-23"
+      "next": "S1: client for the three failure demos",
+      "updated": "2026-11-23T19:48:00+05:30"
     }
   },
-  "tasks": {},
+  "tasks": {
+    "S0-M1": "Passed",
+    "S0-M2": "Passed",
+    "S0-M3": "Passed",
+    "S0-M4": "Passed",
+    "S0-C1": "Passed"
+  },
   "requirements": {
     "P1-A1": {
-      "status": "historical",
-      "evidence": "MAC_4/evidence/02_lan_ping_reachability_all_macs.jpg; MAC_2/01_network_ip_config.png",
-      "note": "IPs have changed since (Mac 3 seen at 10.7.1.218)"
+      "status": "verified",
+      "evidence": "MAC_*/evidence/phase2/S0-*ping*.png; MAC_4/evidence/phase2/S0-05-cp1-dns-ping.png",
+      "note": "re-verified on the current network, 23 Nov 2026"
     },
     "P1-A2": {
       "status": "historical",
       "evidence": "report/report.html Figure 1 (file untracked in git)"
     },
     "P1-B1": {
-      "status": "historical",
-      "evidence": "MAC_1/evidence/MAC1_SS03_DNSMASQ_CONFIG.png; MAC1_SS04_DNSMASQ_RUNNING.png"
+      "status": "verified",
+      "evidence": "MAC_1/evidence/phase2/S0-03-cp1-dnsmasq-fixed.png",
+      "note": "re-verified on the current network, 23 Nov 2026"
     },
     "P1-B2": {
-      "status": "historical",
-      "evidence": "MAC_4/evidence/05_dns_dig_app_nova_test_success.png; MAC_2/06_dns_dig_app_nova_test.png"
+      "status": "verified",
+      "evidence": "MAC_2/evidence/phase2/S0-03-cp1-upstream-dns.png; MAC_3/evidence/phase2/S0-05-cp1-dns-backend-a.png; MAC_4/evidence/phase2/S0-05-cp1-dns-ping.png",
+      "note": "re-verified on the current network, 23 Nov 2026"
     },
     "P1-C1": {
-      "status": "historical",
-      "evidence": "MAC_3/evidence/mac-3_ss/*.jpeg; MAC_3/evidence/04-listen.txt … 11-server-log-remote-ip.txt"
+      "status": "verified",
+      "evidence": "MAC_3/evidence/phase2/S0-05-cp1-dns-backend-a.png",
+      "note": "re-verified on the current network, 23 Nov 2026"
     },
     "P1-C2": {
-      "status": "historical",
-      "evidence": "MAC_4/evidence/03_backend_b_port_3002_listen.jpg; 04_backend_b_local_status_curl.png"
+      "status": "verified",
+      "evidence": "MAC_4/evidence/phase2/S0-03-backend-b-started.png",
+      "note": "re-verified on the current network, 23 Nov 2026"
     },
     "P1-D1": {
-      "status": "historical",
-      "evidence": "MAC_4/evidence/07_load_balancing_round_robin_alternation.jpg; MAC_2/03, 05",
-      "note": "nginx upstream lists Mac 3 at 10.7.19.171"
+      "status": "verified",
+      "evidence": "MAC_4/evidence/phase2/S0-06-cp1-final-check-passed.png",
+      "note": "re-verified on the current network, 23 Nov 2026"
     },
     "P1-E1": {
-      "status": "historical",
-      "evidence": "MAC_4/evidence/06_https_curl_v_success.png"
+      "status": "verified",
+      "evidence": "MAC_4/evidence/phase2/S0-06-cp1-final-check-passed.png (/usr/bin/curl, no -k)",
+      "note": "re-verified on the current network, 23 Nov 2026"
     },
     "P1-E2": {
       "status": "partial",
@@ -161,7 +171,8 @@
       "note": "Phase 1 negotiated http/1.1; http_v2_module on Mac 2 NOT VERIFIED"
     },
     "P1-RV": {
-      "status": "not-started"
+      "status": "partial",
+      "note": "DNS, backends, load balancing and TLS re-verified; S1 items pending"
     },
     "P2-A1": {
       "status": "not-started"

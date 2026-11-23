@@ -1,0 +1,15 @@
+=== MAC3 CP1 23 Nov 2026 19:48
+--- dns list
+10.7.22.124
+--- resolve
+name: app.nova.test
+ip_address: 10.7.5.201
+
+--- backend A
+COMMAND   PID             USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+node    18494 kanishk.personal   12u  IPv4 0x5a02c973e703560d      0t0  TCP *:3001 (LISTEN)
+HTTP/1.1 200 OK
+X-Backend: A
+Content-Type: application/json
+Cache-Control: no-store
+Content-Length: 136

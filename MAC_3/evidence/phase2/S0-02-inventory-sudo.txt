@@ -1,0 +1,8 @@
+=== MAC3 S0 sudo part 23 Nov 2026 19:30
+--- pf
+Status: Disabled                              Debug: Urgent
+
+State Table                          Total             Rate
+--- pf references
+No pf starter references held
+--- port 53

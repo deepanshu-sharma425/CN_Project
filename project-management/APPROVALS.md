@@ -6,7 +6,7 @@ A checkpoint (CP) is a recorded decision. Recording it runs nothing; the owner o
 |---|---|---|---|---|---|
 | CP0 | Create `phase2` branch and project-management scaffold; commit report sources. Local only, no push. | Approved | Kanishk | 23 Nov 2026 | Given in the Claude Code session on Mac 3 |
 | CP0P | Push policy for `origin/phase2` | Pending | | | Recommended: push `phase2` (never `main`) after each approved stage |
-| CP1 | Apply the verified S0 inventory | Pending | | | |
+| CP1 | Apply the verified S0 inventory | Approved and done | Kanishk | 23 Nov 2026 | All four Macs; final check from Mac 4 passed (200, A/B alternating) |
 | CP2 | Phase 1 completion actions | Pending | | | |
 | CP3 | Phase 2 nginx config and T2 | Pending | | | |
 | CP4 | Backup DNS and failover experiment | Pending | | | |

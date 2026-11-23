@@ -1,13 +1,13 @@
 {
   "member": "hrishabh",
   "mac": "Mac 1",
-  "stage": "S0",
-  "task": "Waiting for CP0",
-  "status": "Not started",
-  "latestTest": "None in Phase 2",
+  "stage": "S1",
+  "task": "S0 + CP1 done (dnsmasq rebound to 10.7.22.124)",
+  "status": "Passed",
+  "latestTest": "dig @10.7.22.124 → 10.7.5.201",
   "evidence": [],
   "commit": null,
   "blockers": [],
-  "next": "S0 read-only inventory once phase2 is available",
-  "updated": "2026-11-23"
+  "next": "S1: trust team CA on Mac 1",
+  "updated": "2026-11-23T19:46:00+05:30"
 }
