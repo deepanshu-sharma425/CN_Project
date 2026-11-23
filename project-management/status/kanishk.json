@@ -1,0 +1,16 @@
+{
+  "member": "kanishk",
+  "mac": "Mac 3",
+  "stage": "S0",
+  "task": "CP0 done: phase2 branch and scaffold (local, not pushed)",
+  "status": "Waiting for approval",
+  "latestTest": "Read-only audit 23 Nov",
+  "evidence": [],
+  "commit": null,
+  "blockers": [
+    "Mac 3 DNS list is 10.7.8.113, 1.1.1.1, 8.8.8.8; cached negative answer for app.nova.test (TTL 108002 s)",
+    "Mac 3 does not trust the team CA (CSSMERR_TP_NOT_TRUSTED)"
+  ],
+  "next": "CP0P: decide push policy, then push phase2",
+  "updated": "2026-11-23T17:56:00+05:30"
+}

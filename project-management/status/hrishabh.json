@@ -1,0 +1,13 @@
+{
+  "member": "hrishabh",
+  "mac": "Mac 1",
+  "stage": "S0",
+  "task": "Waiting for CP0",
+  "status": "Not started",
+  "latestTest": "None in Phase 2",
+  "evidence": [],
+  "commit": null,
+  "blockers": [],
+  "next": "S0 read-only inventory once phase2 is available",
+  "updated": "2026-11-23"
+}
