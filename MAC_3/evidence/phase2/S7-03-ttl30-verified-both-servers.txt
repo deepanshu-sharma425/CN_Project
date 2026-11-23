@@ -1,0 +1,12 @@
+=== S7 check from Mac 3 23 Nov 2026 22:21:20
+10.7.22.124 app A: ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 29314 app.nova.test.		30	IN	A	10.7.5.201 
+10.7.22.124 api A: ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 13268 api.nova.test.		30	IN	A	10.7.5.201 
+10.7.22.124 app AAAA: status: NOERROR
+10.7.1.218 app A: ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 30717 app.nova.test.		30	IN	A	10.7.5.201 
+10.7.1.218 api A: ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 34809 api.nova.test.		30	IN	A	10.7.5.201 
+10.7.1.218 app AAAA: status: NOERROR
+--- client (system resolver) after flush
+ip_address: 10.7.5.201
+HTTP/2 200 
+x-backend: B
+x-edge: mac2

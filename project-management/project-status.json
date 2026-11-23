@@ -2,8 +2,8 @@
   "schema": 1,
   "asOf": "2026-11-23T21:02:00+05:30",
   "source": "Coordinator (Kanishk, Mac 3): S0 inventory and CP1 completed; screenshots relayed from Macs 1, 2, 4.",
-  "currentStage": "S7",
-  "nextMilestone": "S7 (Extension B): local-ttl=30 on both dnsmasq servers; fix AAAA NXDOMAIN",
+  "currentStage": "S8",
+  "nextMilestone": "S8 (Extension E): DNS cutover to Mac 4 edge, cached client Mac 1 vs flushed client Mac 3, then rollback",
   "inventory": {
     "mac1": {
       "ip": "10.7.22.124",
