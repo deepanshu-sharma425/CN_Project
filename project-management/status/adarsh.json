@@ -1,13 +1,13 @@
 {
   "member": "adarsh",
   "mac": "Mac 4",
-  "stage": "S1",
-  "task": "S0 + CP1 done; Backend B running",
+  "stage": "S2",
+  "task": "S1 wrong-port demo passed",
   "status": "Passed",
-  "latestTest": "6 requests from Mac 4: 200, A/B alternating",
+  "latestTest": "8443 → Connection refused",
   "evidence": [],
   "commit": null,
   "blockers": [],
-  "next": "S1: client for the three failure demos",
-  "updated": "2026-11-23T19:48:00+05:30"
+  "next": "S2: client for failover demos and T2 timing",
+  "updated": "2026-11-23T19:55:00+05:30"
 }

@@ -1,13 +1,13 @@
 {
   "member": "deepanshu",
   "mac": "Mac 2",
-  "stage": "S1",
-  "task": "S0 + CP1 done (upstream updated)",
+  "stage": "S2",
+  "task": "S1 done: http2 on, phase1 baseline saved",
   "status": "Passed",
   "latestTest": "nginx -t ok, reloaded",
   "evidence": [],
   "commit": null,
   "blockers": [],
-  "next": "S1: http2 on; error-log capture during demos",
-  "updated": "2026-11-23T19:47:00+05:30"
+  "next": "S2: install nova.phase2.conf",
+  "updated": "2026-11-23T19:52:00+05:30"
 }

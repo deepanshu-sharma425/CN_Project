@@ -1,15 +1,13 @@
 {
   "member": "kanishk",
   "mac": "Mac 3",
-  "stage": "S1",
-  "task": "S0 + CP1 done; Backend A running",
+  "stage": "S2",
+  "task": "S1 CA trust done",
   "status": "Passed",
   "latestTest": "Backend A 200; app.nova.test → 10.7.5.201",
   "evidence": [],
   "commit": null,
-  "blockers": [
-    "Mac 3 does not trust the team CA yet (S1)"
-  ],
-  "next": "S1: trust team CA on Mac 3; stop/start A for demos",
-  "updated": "2026-11-23T19:48:00+05:30"
+  "blockers": [],
+  "next": "S2: stop/freeze Backend A on signal",
+  "updated": "2026-11-23T19:57:00+05:30"
 }

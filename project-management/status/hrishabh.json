@@ -2,12 +2,12 @@
   "member": "hrishabh",
   "mac": "Mac 1",
   "stage": "S1",
-  "task": "S0 + CP1 done (dnsmasq rebound to 10.7.22.124)",
+  "task": "S1 CA trust done",
   "status": "Passed",
   "latestTest": "dig @10.7.22.124 → 10.7.5.201",
   "evidence": [],
   "commit": null,
   "blockers": [],
-  "next": "S1: trust team CA on Mac 1",
-  "updated": "2026-11-23T19:46:00+05:30"
+  "next": "S3 (backup DNS) after S2",
+  "updated": "2026-11-23T19:51:00+05:30"
 }

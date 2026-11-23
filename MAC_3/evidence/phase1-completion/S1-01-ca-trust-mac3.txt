@@ -1,0 +1,6 @@
+=== MAC3 S1 CA trust 23 Nov 2026 19:51
+added
+--- keychain check
+...certificate verification successful.
+--- https check
+200 0
