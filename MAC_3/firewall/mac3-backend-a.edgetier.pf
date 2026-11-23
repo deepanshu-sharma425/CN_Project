@@ -1,9 +1,9 @@
 # Mac 3 / Backend A / TCP 3001 -- EDGE-TIER ruleset (Extension E, loaded at CP5b)
 # The primary edge (Mac 2) and the standby edge (Mac 4) may reach 3001.
-# TEMPLATE: replace the placeholders with the verified S0 values before loading.
-mac2 = "SET_MAC2_IP_FROM_S0"     # primary edge
-mac3 = "SET_MAC3_IP_FROM_S0"     # this Mac (self)
-mac4 = "SET_MAC4_IP_FROM_S0"     # standby edge
+# IPs filled from the verified S0 inventory (23 Nov 2026).
+mac2 = "10.7.5.201"     # primary edge
+mac3 = "10.7.1.218"     # this Mac (self)
+mac4 = "10.7.27.160"     # standby edge
 pass  in quick on lo0 all
 pass  in quick proto tcp from $mac3 to any port 3001
 pass  in quick proto tcp from { $mac2, $mac4 } to any port 3001

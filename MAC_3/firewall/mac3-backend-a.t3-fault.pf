@@ -1,8 +1,8 @@
 # Mac 3 / Backend A -- T3 FAULT ruleset (CP6, used only during the T3 timing test)
 # Nobody except Mac 3 itself reaches 3001; drops are silent, so nginx sees a connect timeout.
 # Restore the edge-tier ruleset immediately after the test.
-# TEMPLATE: replace SET_MAC3_IP_FROM_S0 with the verified S0 value before loading.
-mac3 = "SET_MAC3_IP_FROM_S0"
+# IPs filled from the verified S0 inventory (23 Nov 2026).
+mac3 = "10.7.1.218"
 pass  in quick on lo0 all
 pass  in quick proto tcp from $mac3 to any port 3001
 block drop in quick proto tcp from any to any port 3001

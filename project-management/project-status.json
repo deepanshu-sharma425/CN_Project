@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "asOf": "2026-11-23T20:30:00+05:30",
+  "asOf": "2026-11-23T20:42:00+05:30",
   "source": "Coordinator (Kanishk, Mac 3): S0 inventory and CP1 completed; screenshots relayed from Macs 1, 2, 4.",
-  "currentStage": "S3",
-  "nextMilestone": "S3 Part B: stop Mac 1 dnsmasq and prove clients resolve through Mac 3 (capture + Mac 3 query log)",
+  "currentStage": "S4",
+  "nextMilestone": "S4 (Extension C): pf baseline, strict rules on Mac 3 and Mac 4, allowed/blocked proofs, rollback test, edge-tier",
   "inventory": {
     "mac1": {
       "ip": "10.7.22.124",
@@ -92,7 +92,11 @@
     "S2-freeze": "Passed",
     "S3-install": "Passed",
     "S3-mac1cfg": "Passed",
-    "S2-spof": "In progress"
+    "S2-spof": "In progress",
+    "S3-clients": "Passed",
+    "S3-stop": "Passed",
+    "S3-capture": "Passed",
+    "S3-dnsvsapp": "Passed"
   },
   "requirements": {
     "P1-A1": {
@@ -197,15 +201,19 @@
       "note": "dnsmasq 2.93 on Mac 3, NOERROR aa 10.7.5.201"
     },
     "P2-A2": {
-      "status": "partial",
-      "evidence": "MAC_1/evidence/phase2/S3-01-primary-forwarding-and-log.png; MAC_2/evidence/phase2/S3-02-client-dns-both-servers.png",
-      "note": "Mac 1 and Mac 2 list both servers; Mac 3 and Mac 4 pending"
+      "status": "verified",
+      "evidence": "MAC_*/evidence/phase2/S3-0*-client-dns-both-servers.png; MAC_1/evidence/phase2/S3-01-primary-forwarding-and-log.png",
+      "note": "all four Macs list exactly 10.7.22.124 and 10.7.1.218"
     },
     "P2-A3": {
-      "status": "not-started"
+      "status": "verified",
+      "evidence": "MAC_1/evidence/phase2/S3-04-primary-dns-stopped.png; MAC_4/evidence/phase2/S3-06-failover-resolver-and-website.png; MAC_3/evidence/phase2/S3-07-backup-dns-query-log.txt",
+      "note": "Mac 1 stopped 20:35:38; Mac 3 answered Mac 4 at 20:36:22; all Macs moved to Mac 3 within ~20 s; observed, not assumed"
     },
     "P2-A4": {
-      "status": "not-started"
+      "status": "verified",
+      "evidence": "MAC_4/evidence/phase2/S3-07-dns-failure-vs-app-failure.png",
+      "note": "both DNS down: by name resolving timed out (000); --resolve to 10.7.5.201 → 200"
     },
     "P2-B1": {
       "status": "not-started",
@@ -278,5 +286,8 @@
   "deliverables": {
     "D1": "partial",
     "D3": "historical"
-  }
+  },
+  "findings": [
+    "dnsmasq answers AAAA app.nova.test with NXDOMAIN because of local=/nova.test/; to be fixed in S7 (TTL step)"
+  ]
 }

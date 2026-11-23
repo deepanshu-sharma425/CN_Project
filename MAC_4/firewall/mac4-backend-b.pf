@@ -2,9 +2,9 @@
 # The standby edge IS Mac 4, so the edge tier for 3002 is Mac 2 plus Mac 4 itself.
 # Self is allowed twice on purpose (lo0 and its own LAN IP): which interface pf sees for
 # self-addressed traffic is NOT VERIFIED; counters and a tcpdump -k capture decide it.
-# TEMPLATE: replace the placeholders with the verified S0 values before loading.
-mac2 = "SET_MAC2_IP_FROM_S0"     # primary edge
-mac4 = "SET_MAC4_IP_FROM_S0"     # this Mac (self) = standby edge
+# IPs filled from the verified S0 inventory (23 Nov 2026).
+mac2 = "10.7.5.201"     # primary edge
+mac4 = "10.7.27.160"     # this Mac (self) = standby edge
 pass  in quick on lo0 all
 pass  in quick proto tcp from $mac4 to any port 3002
 pass  in quick proto tcp from $mac2 to any port 3002
