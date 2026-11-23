@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "asOf": "2026-11-23T20:50:00+05:30",
+  "asOf": "2026-11-23T21:02:00+05:30",
   "source": "Coordinator (Kanishk, Mac 3): S0 inventory and CP1 completed; screenshots relayed from Macs 1, 2, 4.",
-  "currentStage": "S4",
-  "nextMilestone": "S4 (Extension C): pf baseline, strict rules on Mac 3 and Mac 4, allowed/blocked proofs, rollback test, edge-tier",
+  "currentStage": "S6a",
+  "nextMilestone": "S6a (Extension E prep): standby nginx on Mac 4 with its own key + CSR signed by the team CA; preflight E1–E11",
   "inventory": {
     "mac1": {
       "ip": "10.7.22.124",
@@ -102,7 +102,9 @@
     "S4-m4": "Passed",
     "S4-blocked": "Passed",
     "S4-allowed": "Passed",
-    "S4-edgetier": "In progress"
+    "S4-edgetier": "Passed",
+    "S5-fault": "Passed",
+    "S5-timing": "Passed"
   },
   "requirements": {
     "P1-A1": {
@@ -269,8 +271,8 @@
     },
     "P2-D5": {
       "status": "verified",
-      "evidence": "project-management/results/T2-frozen-backend-timing.md",
-      "note": "T2: 60.13 s (Phase 1) vs 5.25 s / 5.56 s (Phase 2); T3 still to run in S5"
+      "evidence": "project-management/results/T2-frozen-backend-timing.md; project-management/results/T3-silent-drop-timing.md",
+      "note": "T2 60.13 s → 5.25/5.56 s; T3 60.14 s → 2.07 s"
     },
     "P2-E1": {
       "status": "not-started"

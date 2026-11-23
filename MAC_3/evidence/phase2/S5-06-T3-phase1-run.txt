@@ -1,0 +1,11 @@
+=== T3 PHASE 1 (silent drop), client Mac 3, 23 Nov 2026 20:59:02
+HTTP/2 200 
+T3 fault rules loaded 20:59:02
+--- waiting 10 s so the open keep-alive connection closes
+--- open connections Mac 2 -> Backend A (should be none)
+none
+20:59:12 request 1 -> 200 0.112679s served-by=B
+20:59:12 request 2 -> 200 60.137310s served-by=B
+21:00:12 request 3 -> 200 0.212196s served-by=B
+21:00:12 request 4 -> 200 0.262722s served-by=B
+edge-tier rules restored 21:00:13

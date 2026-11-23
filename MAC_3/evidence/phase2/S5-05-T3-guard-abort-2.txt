@@ -1,0 +1,3 @@
+=== T3 PHASE 2 (silent drop), client Mac 3, 23 Nov 2026 20:56:41
+HTTP/2 200 
+ABORT: Phase 2 config expected, but no x-edge
