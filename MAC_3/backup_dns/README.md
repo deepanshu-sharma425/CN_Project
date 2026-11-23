@@ -1,4 +1,7 @@
 # Mac 3 backup DNS (Extension A)
 
-Filled in at S3 (CP4). This folder will hold the Phase 2 dnsmasq block used on Mac 3 and its evidence notes.
-The records must stay identical to Mac 1's at all times (same `address=` lines, same `local-ttl`).
+[`dnsmasq-nova-backup.conf`](dnsmasq-nova-backup.conf) is the project block used in `/opt/homebrew/etc/dnsmasq.conf` on Mac 3.
+
+Its records must stay identical to Mac 1's (`MAC_1/dnsmasq.phase2-additions.conf`): the same `host-record=…,30` lines and the same `local-ttl=30`. Only `listen-address` differs, because it holds each Mac's own IP.
+
+Failover proof and query log: `MAC_3/evidence/phase2/S3-*` and `MAC_4/evidence/phase2/S3-*`.
