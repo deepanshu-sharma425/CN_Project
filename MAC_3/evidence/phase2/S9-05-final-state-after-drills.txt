@@ -1,0 +1,14 @@
+=== S9 final state check from Mac 3 23 Nov 2026 22:38:51
+DNS @10.7.22.124: 10.7.5.201 ttl=
+ttl=<<>>
+ttl=(1
+ttl=global
+ttl=30
+DNS @10.7.1.218: 10.7.5.201 ttl=
+ttl=<<>>
+ttl=(1
+ttl=global
+ttl=30
+edge 10.7.5.201: 200/mac2/B/0.102290s 200/mac2/B/0.040216s 200/mac2/A/0.083278s 200/mac2/B/0.129049s 
+edge 10.7.27.160: 200/mac4/B/0.082494s 200/mac4/A/0.070820s 200/mac4/B/0.052097s 200/mac4/A/0.052292s 
+system resolver: 200 mac2

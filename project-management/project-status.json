@@ -2,8 +2,8 @@
   "schema": 1,
   "asOf": "2026-11-23T21:02:00+05:30",
   "source": "Coordinator (Kanishk, Mac 3): S0 inventory and CP1 completed; screenshots relayed from Macs 1, 2, 4.",
-  "currentStage": "S9",
-  "nextMilestone": "S9 (Extension F): fault drills, layer-by-layer diagnosis",
+  "currentStage": "S10",
+  "nextMilestone": "S10: Phase 2 report, evidence index, push decision",
   "inventory": {
     "mac1": {
       "ip": "10.7.22.124",
