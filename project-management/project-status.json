@@ -1,0 +1,308 @@
+{
+  "schema": 1,
+  "asOf": "2026-11-23T21:02:00+05:30",
+  "source": "Coordinator (Kanishk, Mac 3): S0 inventory and CP1 completed; screenshots relayed from Macs 1, 2, 4.",
+  "currentStage": "S10",
+  "nextMilestone": "S10: Phase 2 report, evidence index, push decision",
+  "inventory": {
+    "mac1": {
+      "ip": "10.7.22.124",
+      "note": "verified 23 Nov 19:30; dnsmasq rebound after CP1"
+    },
+    "mac2": {
+      "ip": "10.7.5.201",
+      "note": "verified 23 Nov 19:31"
+    },
+    "mac3": {
+      "ip": "10.7.1.218",
+      "note": "verified 23 Nov 19:27"
+    },
+    "mac4": {
+      "ip": "10.7.27.160",
+      "note": "verified 23 Nov 19:30; Docker container on 3002 stopped"
+    }
+  },
+  "members": {
+    "hrishabh": {
+      "mac": "Mac 1",
+      "stage": "S1",
+      "task": "S1 CA trust done",
+      "status": "Passed",
+      "latestTest": "dig @10.7.22.124 → 10.7.5.201",
+      "evidence": [],
+      "commit": null,
+      "blockers": [],
+      "next": "S3 (backup DNS) after S2",
+      "updated": "2026-11-23T19:51:00+05:30"
+    },
+    "deepanshu": {
+      "mac": "Mac 2",
+      "stage": "S2",
+      "task": "S2: phase2 config live, demos 1-2 logged",
+      "status": "Passed",
+      "latestTest": "502 with x-edge: mac2; error.log both refused",
+      "evidence": [],
+      "commit": null,
+      "blockers": [],
+      "next": "T2: swap baseline/phase2 configs",
+      "updated": "2026-11-23T20:06:00+05:30"
+    },
+    "kanishk": {
+      "mac": "Mac 3",
+      "stage": "S2",
+      "task": "S2: Backend A stopped/restarted for demos",
+      "status": "Passed",
+      "latestTest": "Backend A 200; app.nova.test → 10.7.5.201",
+      "evidence": [],
+      "commit": null,
+      "blockers": [],
+      "next": "T2: freeze/unfreeze Backend A",
+      "updated": "2026-11-23T20:06:00+05:30"
+    },
+    "adarsh": {
+      "mac": "Mac 4",
+      "stage": "S2",
+      "task": "S2 demos 1-2 done as client",
+      "status": "Passed",
+      "latestTest": "A stopped → 6/6 B; both stopped → 502",
+      "evidence": [],
+      "commit": null,
+      "blockers": [],
+      "next": "T2 timer runs",
+      "updated": "2026-11-23T20:06:25+05:30"
+    }
+  },
+  "tasks": {
+    "S0-M1": "Passed",
+    "S0-M2": "Passed",
+    "S0-M3": "Passed",
+    "S0-M4": "Passed",
+    "S0-C1": "Passed",
+    "S1-trust-m1": "Passed",
+    "S1-trust-m3": "Passed",
+    "S1-trust-m4": "Passed",
+    "S1-http2": "Passed",
+    "S1-wrongport": "Passed",
+    "S2-config": "Passed",
+    "S2-docdemo": "Passed",
+    "S1-onebackend": "Passed",
+    "S1-bothdown": "Passed",
+    "S1-errlog": "Passed",
+    "S2-T2": "Passed",
+    "S2-freeze": "Passed",
+    "S3-install": "Passed",
+    "S3-mac1cfg": "Passed",
+    "S2-spof": "In progress",
+    "S3-clients": "Passed",
+    "S3-stop": "Passed",
+    "S3-capture": "Passed",
+    "S3-dnsvsapp": "Passed",
+    "S4-m3-baseline": "Passed",
+    "S4-m3-strict": "Passed",
+    "S4-m4": "Passed",
+    "S4-blocked": "Passed",
+    "S4-allowed": "Passed",
+    "S4-edgetier": "Passed",
+    "S5-fault": "Passed",
+    "S5-timing": "Passed"
+  },
+  "requirements": {
+    "P1-A1": {
+      "status": "verified",
+      "evidence": "MAC_*/evidence/phase2/S0-*ping*.png; MAC_4/evidence/phase2/S0-05-cp1-dns-ping.png",
+      "note": "re-verified on the current network, 23 Nov 2026"
+    },
+    "P1-A2": {
+      "status": "historical",
+      "evidence": "report/report.html Figure 1 (file untracked in git)"
+    },
+    "P1-B1": {
+      "status": "verified",
+      "evidence": "MAC_1/evidence/phase2/S0-03-cp1-dnsmasq-fixed.png",
+      "note": "re-verified on the current network, 23 Nov 2026"
+    },
+    "P1-B2": {
+      "status": "verified",
+      "evidence": "MAC_2/evidence/phase2/S0-03-cp1-upstream-dns.png; MAC_3/evidence/phase2/S0-05-cp1-dns-backend-a.png; MAC_4/evidence/phase2/S0-05-cp1-dns-ping.png",
+      "note": "re-verified on the current network, 23 Nov 2026"
+    },
+    "P1-C1": {
+      "status": "verified",
+      "evidence": "MAC_3/evidence/phase2/S0-05-cp1-dns-backend-a.png",
+      "note": "re-verified on the current network, 23 Nov 2026"
+    },
+    "P1-C2": {
+      "status": "verified",
+      "evidence": "MAC_4/evidence/phase2/S0-03-backend-b-started.png",
+      "note": "re-verified on the current network, 23 Nov 2026"
+    },
+    "P1-D1": {
+      "status": "verified",
+      "evidence": "MAC_4/evidence/phase2/S0-06-cp1-final-check-passed.png",
+      "note": "re-verified on the current network, 23 Nov 2026"
+    },
+    "P1-E1": {
+      "status": "verified",
+      "evidence": "MAC_4/evidence/phase2/S0-06-cp1-final-check-passed.png (/usr/bin/curl, no -k)",
+      "note": "re-verified on the current network, 23 Nov 2026"
+    },
+    "P1-E2": {
+      "status": "verified",
+      "evidence": "MAC_1/evidence/phase1-completion/S1-01-ca-trust-mac1.png; MAC_3/evidence/phase1-completion/S1-01-ca-trust-mac3.png; MAC_4/evidence/phase2/S0-01-inventory-part2.png (Mac 4 Keychain); Mac 2 is the CA host",
+      "note": "team CA trusted in the System keychain on all client Macs, 23 Nov 2026"
+    },
+    "P1-E3": {
+      "status": "historical",
+      "evidence": "MAC_4/evidence/13_wireshark_tls_handshake.png; 13b_…; wireshark_tls.pcapng"
+    },
+    "P1-F1": {
+      "status": "historical",
+      "evidence": "MAC_2/09, 11, 12; MAC_4/evidence/09, 10"
+    },
+    "P1-G1": {
+      "status": "historical",
+      "evidence": "MAC_4/evidence/11_wireshark_dns_query_response.jpeg; MAC_1/wireshark_dns.pcapng"
+    },
+    "P1-G2": {
+      "status": "historical",
+      "evidence": "MAC_4/evidence/12_wireshark_tcp_3way_handshake.jpeg"
+    },
+    "P1-G3": {
+      "status": "historical",
+      "evidence": "report/report.html section 10 (ports table)"
+    },
+    "P1-X1": {
+      "status": "historical",
+      "evidence": "MAC_4/evidence/14–17 (before / broken / restored)"
+    },
+    "P1-X2": {
+      "status": "historical",
+      "evidence": "MAC_1/evidence/MAC1_SS08a, SS08, SS08b"
+    },
+    "P1-X3": {
+      "status": "verified",
+      "evidence": "MAC_4/evidence/phase2/S2-02-demo1-before.png, S2-03-demo1-a-stopped-all-b.png, S2-06-demo1-a-returns.png; MAC_2/evidence/phase2/S2-04-demo1-errorlog.png",
+      "note": "A stopped 19:59:43 → 6/6 200 from B; A back at 20:02:49"
+    },
+    "P1-X4": {
+      "status": "verified",
+      "evidence": "MAC_4/evidence/phase2/S2-08-demo2-both-stopped-502.png; MAC_2/evidence/phase2/S2-08-demo2-errorlog-both-refused.png; MAC_4/evidence/phase2/S2-10-demo2-restored.png",
+      "note": "HTTP/2 502 from nginx with x-edge: mac2 at 20:04:41; one request (*61) tried A then B"
+    },
+    "P1-X5": {
+      "status": "verified",
+      "evidence": "MAC_4/evidence/phase1-completion/S1-07-wrong-port-refused.png",
+      "note": "ping ok, 443 → 200, 8443 → Connection refused (10.7.27.160:54445 → 10.7.5.201:8443)"
+    },
+    "P1-H2": {
+      "status": "verified",
+      "evidence": "MAC_2/evidence/phase1-completion/S1-03-http2-and-baseline-config.png",
+      "note": "http2 on; ALPN server accepted h2; HTTP/2 200"
+    },
+    "P1-RV": {
+      "status": "partial",
+      "note": "DNS, backends, load balancing and TLS re-verified; S1 items pending"
+    },
+    "P2-A1": {
+      "status": "verified",
+      "evidence": "MAC_3/evidence/phase2/S3-01-backup-dns-setup.txt; MAC_3/backup_dns/dnsmasq-nova-backup.conf",
+      "note": "dnsmasq 2.93 on Mac 3, NOERROR aa 10.7.5.201"
+    },
+    "P2-A2": {
+      "status": "verified",
+      "evidence": "MAC_*/evidence/phase2/S3-0*-client-dns-both-servers.png; MAC_1/evidence/phase2/S3-01-primary-forwarding-and-log.png",
+      "note": "all four Macs list exactly 10.7.22.124 and 10.7.1.218"
+    },
+    "P2-A3": {
+      "status": "verified",
+      "evidence": "MAC_1/evidence/phase2/S3-04-primary-dns-stopped.png; MAC_4/evidence/phase2/S3-06-failover-resolver-and-website.png; MAC_3/evidence/phase2/S3-07-backup-dns-query-log.txt",
+      "note": "Mac 1 stopped 20:35:38; Mac 3 answered Mac 4 at 20:36:22; all Macs moved to Mac 3 within ~20 s; observed, not assumed"
+    },
+    "P2-A4": {
+      "status": "verified",
+      "evidence": "MAC_4/evidence/phase2/S3-07-dns-failure-vs-app-failure.png",
+      "note": "both DNS down: by name resolving timed out (000); --resolve to 10.7.5.201 → 200"
+    },
+    "P2-B1": {
+      "status": "not-started",
+      "note": "dnsmasq address= records answer TTL 0 today"
+    },
+    "P2-B2": {
+      "status": "not-started"
+    },
+    "P2-B3": {
+      "status": "not-started"
+    },
+    "P2-B4": {
+      "status": "not-started"
+    },
+    "P2-C1": {
+      "status": "verified",
+      "evidence": "MAC_3/evidence/phase2/S4-02-strict-loaded-token-counters.png; MAC_4/evidence/phase2/S4-02-rules-loaded-counters.png",
+      "note": "pf anchor com.apple/nova on Mac 3 and Mac 4; only Mac 2 (+ the Mac itself via lo0) reaches 3001/3002"
+    },
+    "P2-C2": {
+      "status": "verified",
+      "evidence": "MAC_2/evidence/phase2/S4-01-allowed-from-edge.png; MAC_1/evidence/phase2/S4-01-blocked-from-mac1.png; MAC_3/evidence/phase2/S4-03-tests-and-counters.png; MAC_4/evidence/phase2/S4-03-tests-and-counters.png; MAC_3/evidence/phase2/S4-04-block-counter-and-rollback.png",
+      "note": "Mac 2 → 200 direct; Mac 1/3/4 → Operation timed out; block rule Packets 6 (Mac 3) / 4 (Mac 4); self traffic matched the lo0 rule"
+    },
+    "P2-C3": {
+      "status": "verified",
+      "evidence": "MAC_3/evidence/phase2/S4-04-block-counter-and-rollback.png; MAC_4/evidence/phase2/S4-04-rollback-pf-still-enabled.png; MAC_1/evidence/phase2/S4-02-after-rollback-ports-open.png; MAC_3/firewall/ROLLBACK.md",
+      "note": "rollback restored each Mac to its own baseline (Mac 3 Disabled, Mac 4 still Enabled); Mac 1 then connected (negative control)"
+    },
+    "P2-D1": {
+      "status": "verified",
+      "evidence": "MAC_2/evidence/phase2/S2-01-phase2-config-diff-headers.png; S2-04-demo1-errorlog.png",
+      "note": "passive health checks: max_fails=1 fail_timeout=10s, proxy_next_upstream error timeout; one connect() failure then A skipped"
+    },
+    "P2-D2": {
+      "status": "verified",
+      "evidence": "MAC_4/evidence/phase2/S2-03-demo1-a-stopped-all-b.png"
+    },
+    "P2-D3": {
+      "status": "verified",
+      "evidence": "MAC_4/evidence/phase2/S2-06-demo1-a-returns.png",
+      "note": "A reappears within the 10 s fail_timeout window"
+    },
+    "P2-D4": {
+      "status": "partial",
+      "note": "SPOF (Mac 2 nginx) explained; demonstrated by Extension E later"
+    },
+    "P2-D5": {
+      "status": "verified",
+      "evidence": "project-management/results/T2-frozen-backend-timing.md; project-management/results/T3-silent-drop-timing.md",
+      "note": "T2 60.13 s → 5.25/5.56 s; T3 60.14 s → 2.07 s"
+    },
+    "P2-E1": {
+      "status": "not-started"
+    },
+    "P2-E2": {
+      "status": "not-started"
+    },
+    "P2-E3": {
+      "status": "not-started"
+    },
+    "P2-F1": {
+      "status": "not-started"
+    },
+    "P2-R1": {
+      "status": "not-started"
+    },
+    "P2-R2": {
+      "status": "not-started"
+    },
+    "P2-R3": {
+      "status": "not-started"
+    }
+  },
+  "commits": [],
+  "deliverables": {
+    "D1": "partial",
+    "D3": "historical"
+  },
+  "findings": [
+    "dnsmasq answers AAAA app.nova.test with NXDOMAIN because of local=/nova.test/; to be fixed in S7 (TTL step)",
+    "pf sees a Mac connecting to its own LAN IP on lo0 (self-IP rule never matched; lo0 rule did)"
+  ]
+}

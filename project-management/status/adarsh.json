@@ -1,0 +1,13 @@
+{
+  "member": "adarsh",
+  "mac": "Mac 4",
+  "stage": "S2",
+  "task": "S2 demos 1-2 done as client",
+  "status": "Passed",
+  "latestTest": "A stopped → 6/6 B; both stopped → 502",
+  "evidence": [],
+  "commit": null,
+  "blockers": [],
+  "next": "T2 timer runs",
+  "updated": "2026-11-23T20:06:25+05:30"
+}

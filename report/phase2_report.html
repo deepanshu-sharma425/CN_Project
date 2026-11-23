@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Private Network Service Platform: Phase 2 Report (Team Nova)</title>
+<style>
+  @page {
+    size: A4;
+    margin: 17mm 19mm 18mm 19mm;
+    @bottom-left {
+      content: "Team Nova · Private Network Service Platform";
+      font: 8pt "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #9aa0a8;
+    }
+    @bottom-right {
+      content: counter(page);
+      font: 8pt "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #9aa0a8;
+    }
+  }
+  @page :first {
+    @bottom-left { content: none; }
+    @bottom-right { content: none; }
+  }
+
+  :root {
+    --ink: #1c1f24;
+    --muted: #6b7280;
+    --faint: #9aa0a8;
+    --rule: #dfe2e7;
+    --wash: #f4f5f7;
+    --mono: "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0;
+    font: 10pt/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+  }
+  p { margin: 0 0 2.6mm; }
+  code { font: 8.6pt var(--mono); white-space: nowrap; }
+
+  /* Cover */
+  .cover {
+    height: 259mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    break-after: page;
+  }
+  .cover-top { padding-top: 58mm; }
+  .cover .title {
+    font-size: 34pt;
+    line-height: 1.12;
+    font-weight: 600;
+    letter-spacing: -0.4pt;
+    margin: 3mm 0 6mm;
+  }
+  .cover .subtitle { font-size: 14pt; margin: 0 0 3mm; }
+  .cover .meta { color: var(--muted); margin: 0; }
+  .cover table td { padding: 2.2mm 3mm 2.2mm 0; font-size: 10pt; }
+
+  /* Headings */
+  .kicker {
+    font-size: 8pt;
+    letter-spacing: 0.9pt;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 1mm;
+  }
+  h1 {
+    font-size: 16pt;
+    line-height: 1.25;
+    font-weight: 600;
+    margin: 0 0 3.2mm;
+    break-after: avoid;
+  }
+  h2 {
+    font-size: 10.5pt;
+    font-weight: 600;
+    margin: 4.5mm 0 1.6mm;
+    break-after: avoid;
+  }
+  section { margin-bottom: 7mm; }
+  section.newpage { break-before: page; }
+  .head { break-inside: avoid; break-after: avoid; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; break-inside: avoid; }
+  th, td {
+    text-align: left;
+    vertical-align: top;
+    padding: 1.5mm 3mm 1.5mm 0;
+    font-size: 9.1pt;
+    line-height: 1.4;
+    border-bottom: 0.3mm solid var(--rule);
+  }
+  th { font-weight: 600; border-bottom: 0.3mm solid var(--ink); white-space: nowrap; }
+  td.nw { white-space: nowrap; }
+  td code, th code { font-size: 8.3pt; }
+  .note { font-size: 8.4pt; color: var(--muted); margin-top: -2mm; }
+
+  /* Figures */
+  figure { margin: 3.5mm 0 4.5mm; break-inside: avoid; }
+  figure img { display: block; width: 100%; border-radius: 1.2mm; }
+  figure img + img { margin-top: 0.8mm; }
+  figcaption { font-size: 8.3pt; line-height: 1.4; color: var(--muted); margin-top: 1.6mm; }
+  figcaption b { color: var(--ink); font-weight: 600; }
+  .src { display: block; font: 7.2pt var(--mono); color: var(--faint); margin-top: 0.4mm; }
+  .cols { display: grid; gap: 5mm; align-items: start; break-inside: avoid; }
+  .cols figure { margin-top: 2mm; }
+  .w50 { width: 50%; } .w60 { width: 60%; } .w65 { width: 65%; }
+  .w70 { width: 70%; } .w75 { width: 75%; } .w80 { width: 80%; } .w88 { width: 88%; }
+  .pair { display: flex; gap: 3mm; align-items: flex-start; }
+  .pair img { width: 0; min-width: 0; margin-top: 0; }
+
+  pre {
+    font: 8.2pt/1.5 var(--mono);
+    background: var(--wash);
+    border-radius: 1.2mm;
+    padding: 2.8mm 3.5mm;
+    margin: 2mm 0 3.5mm;
+    white-space: pre;
+    overflow: hidden;
+    break-inside: avoid;
+  }
+  ol, ul { margin: 0 0 2.6mm; padding-left: 5mm; }
+  li { margin-bottom: 1mm; }
+
+  /* Diagram */
+  svg text { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; fill: #1c1f24; }
+  svg .b { font-weight: 600; font-size: 12px; }
+  svg .s { font-size: 10.5px; fill: #4b5563; }
+  svg .l { font-size: 10.5px; }
+  svg .box { fill: #fff; stroke: #1c1f24; stroke-width: 1; }
+  svg .arrow { stroke: #1c1f24; stroke-width: 1.1; fill: none; marker-end: url(#tip); }
+  svg .dash { stroke-dasharray: 4 3; }
+  .pair + figcaption { font-size: 8.3pt; line-height: 1.4; color: var(--muted); margin-top: 1.6mm; }
+  .pair + figcaption b { color: var(--ink); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- ───────────── Cover ───────────── -->
+<div class="cover">
+  <div class="cover-top">
+    <p class="kicker">Computer Networks · Course Project</p>
+    <div class="title">Private Network<br>Service Platform</div>
+    <p class="subtitle">Phase 2 Report: Harden, Recover and Troubleshoot</p>
+    <p class="meta">Team Nova · app.nova.test · November 2026</p>
+  </div>
+  <div class="cover-bottom">
+    <p class="kicker">Team members</p>
+    <table>
+      <tr><th>Name</th><th>Enrollment No.</th><th>Machine</th><th>Role in Phase 2</th></tr>
+      <tr><td>Hrishabh Prajapati</td><td>2401020027</td><td>Mac 1</td><td>Primary DNS server, test client</td></tr>
+      <tr><td>Deepanshu</td><td>2401010144</td><td>Mac 2</td><td>Active edge (nginx, TLS, load balancer), team CA</td></tr>
+      <tr><td>Kanishk Sharma</td><td>2401010207</td><td>Mac 3</td><td>Backend A, backup DNS server, coordination</td></tr>
+      <tr><td>Adarsh Vashistha</td><td>2401010026</td><td>Mac 4</td><td>Backend B, standby edge, test client</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ───────────── 1 Summary ───────────── -->
+<section>
+  <div class="head"><p class="kicker">Section 1</p>
+  <h1>Summary</h1></div>
+  <p>Phase 2 keeps the Phase 1 network (private DNS, one nginx edge, two backends) and makes it harder to break. We added a second DNS server, a visible 30-second TTL, firewall rules around the backends, faster nginx failover, a standby edge on another Mac and a step-by-step way to find faults. All work was done and recorded on 23 November 2026 on the same Wi-Fi network.</p>
+  <table>
+    <tr><th>Ext.</th><th>What the brief asks</th><th>What we showed</th><th>Status</th></tr>
+    <tr><td>A</td><td>Backup DNS resolver</td><td>Mac 3 answers the same records. With Mac 1's DNS stopped, Mac 4 still resolved the name and opened the site (200).</td><td class="nw">Done</td></tr>
+    <tr><td>B</td><td>TTL and record change</td><td>TTL 30 s on both servers. A cached client kept the old answer for about 40 s; a flushed client switched at once.</td><td class="nw">Done</td></tr>
+    <tr><td>C</td><td>Backend isolation</td><td>pf rules: the edge reaches ports 3001/3002, other Macs time out. Rollback tested.</td><td class="nw">Done</td></tr>
+    <tr><td>D</td><td>HA failover</td><td>Backend A stopped: every request served by B. Wait on a broken backend cut from 60 s to 5 s (frozen) and 2 s (silent drop).</td><td class="nw">Done</td></tr>
+    <tr><td>E</td><td>Edge migration by DNS</td><td>Standby nginx on Mac 4 with its own key. DNS moved to Mac 4 and back with no failed request.</td><td class="nw">Done</td></tr>
+    <tr><td>F</td><td>Troubleshooting challenge</td><td>Fixed diagnosis order and a <code>diag</code> script. Four practice faults, each found at the right layer.</td><td class="nw">Ready for the faculty fault</td></tr>
+  </table>
+</section>
+
+<!-- ───────────── 2 Architecture ───────────── -->
+<section class="newpage">
+  <div class="head"><p class="kicker">Section 2</p>
+  <h1>Architecture after Phase 2</h1></div>
+  <figure>
+    <svg viewBox="0 0 820 350" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Phase 2 topology">
+      <defs>
+        <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,1 L9,5 L0,9 z" fill="#1c1f24"/>
+        </marker>
+      </defs>
+      <rect x="6" y="6" width="808" height="338" rx="8" fill="none" stroke="#9aa0a8" stroke-width="1" stroke-dasharray="5 4"/>
+      <text x="20" y="27" class="s">Private Wi-Fi LAN · 10.7.0.0/19 · gateway 10.7.0.1 · dashed = added in Phase 2</text>
+
+      <rect class="box" x="20" y="60" width="120" height="250" rx="5"/>
+      <text x="80" y="178" text-anchor="middle" class="b">Client</text>
+      <text x="80" y="196" text-anchor="middle" class="s">any Mac</text>
+      <text x="80" y="212" text-anchor="middle" class="s">DNS list:</text>
+      <text x="80" y="228" text-anchor="middle" class="s">10.7.22.124,</text>
+      <text x="80" y="244" text-anchor="middle" class="s">10.7.1.218</text>
+
+      <rect class="box" x="270" y="44" width="200" height="54" rx="5"/>
+      <text x="370" y="66" text-anchor="middle" class="b">Mac 1 · Primary DNS</text>
+      <text x="370" y="84" text-anchor="middle" class="s">dnsmasq · 10.7.22.124 · TTL 30</text>
+      <rect class="box dash" x="270" y="108" width="200" height="54" rx="5"/>
+      <text x="370" y="130" text-anchor="middle" class="b">Mac 3 · Backup DNS</text>
+      <text x="370" y="148" text-anchor="middle" class="s">dnsmasq · 10.7.1.218 · TTL 30</text>
+
+      <rect class="box" x="270" y="190" width="200" height="54" rx="5"/>
+      <text x="370" y="212" text-anchor="middle" class="b">Mac 2 · Edge (active)</text>
+      <text x="370" y="230" text-anchor="middle" class="s">nginx · 10.7.5.201 · TCP 443</text>
+      <rect class="box dash" x="270" y="256" width="200" height="54" rx="5"/>
+      <text x="370" y="278" text-anchor="middle" class="b">Mac 4 · Standby edge</text>
+      <text x="370" y="296" text-anchor="middle" class="s">nginx · 10.7.27.160 · TCP 443</text>
+
+      <rect class="box" x="620" y="150" width="180" height="54" rx="5"/>
+      <text x="710" y="172" text-anchor="middle" class="b">Mac 3 · Backend A</text>
+      <text x="710" y="190" text-anchor="middle" class="s">Node.js · 10.7.1.218 · 3001</text>
+      <rect class="box" x="620" y="240" width="180" height="54" rx="5"/>
+      <text x="710" y="262" text-anchor="middle" class="b">Mac 4 · Backend B</text>
+      <text x="710" y="280" text-anchor="middle" class="s">Node.js · 10.7.27.160 · 3002</text>
+      <rect x="610" y="140" width="200" height="164" rx="6" fill="none" stroke="#1c1f24" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="710" y="324" text-anchor="middle" class="s">pf: only the two edges may connect</text>
+
+      <line class="arrow" x1="140" y1="72" x2="269" y2="72"/>
+      <text x="205" y="64" text-anchor="middle" class="s">DNS, UDP 53</text>
+      <line class="arrow dash" x1="140" y1="134" x2="269" y2="134"/>
+      <text x="205" y="126" text-anchor="middle" class="s">if primary fails</text>
+      <line class="arrow" x1="140" y1="216" x2="269" y2="216"/>
+      <text x="205" y="208" text-anchor="middle" class="s">HTTPS, TCP 443</text>
+      <line class="arrow dash" x1="140" y1="282" x2="269" y2="282"/>
+      <text x="205" y="274" text-anchor="middle" class="s">after cutover</text>
+
+      <line class="arrow" x1="470" y1="208" x2="619" y2="180"/>
+      <line class="arrow" x1="470" y1="226" x2="619" y2="262"/>
+      <line class="arrow dash" x1="470" y1="272" x2="619" y2="190"/>
+      <line class="arrow dash" x1="470" y1="290" x2="619" y2="274"/>
+      <text x="545" y="178" text-anchor="middle" class="s">round robin</text>
+    </svg>
+    <figcaption><b>Figure 1.</b> Phase 2 topology. Mac 3 and Mac 4 each have two roles. The client uses the backup DNS only when the primary does not answer, and the standby edge only after the DNS record is moved to it.</figcaption>
+  </figure>
+  <table>
+    <tr><th>Machine</th><th>IP (23 Nov)</th><th>Services</th><th>Ports</th><th>Cloud equivalent</th></tr>
+    <tr><td class="nw">Mac 1</td><td class="nw">10.7.22.124</td><td>Primary DNS (dnsmasq 2.93)</td><td class="nw">UDP 53</td><td>Managed DNS (Route 53)</td></tr>
+    <tr><td class="nw">Mac 2</td><td class="nw">10.7.5.201</td><td>Active edge: nginx 1.31.6, TLS, load balancer</td><td class="nw">TCP 443, 8080</td><td>Cloud load balancer (ALB)</td></tr>
+    <tr><td class="nw">Mac 3</td><td class="nw">10.7.1.218</td><td>Backend A (Node.js); backup DNS (dnsmasq)</td><td class="nw">TCP 3001; UDP 53</td><td>App instance A; second DNS resolver</td></tr>
+    <tr><td class="nw">Mac 4</td><td class="nw">10.7.27.160</td><td>Backend B (Node.js); standby edge (nginx)</td><td class="nw">TCP 3002; TCP 443</td><td>App instance B; standby load balancer</td></tr>
+  </table>
+  <p class="note">The Wi-Fi gave every Mac a new address since Phase 1 (for example Mac 2 was 10.7.7.58). We re-checked IPs, gateway and ping between all four Macs before changing anything, and updated every config. Evidence: <code>project-management/IP_INVENTORY.md</code>.</p>
+  <p>A request still travels the same way as in Phase 1: DNS lookup (UDP 53), TCP handshake to the edge (443), TLS handshake, then HTTP/2 inside TLS; nginx forwards plain HTTP to a backend. Phase 2 adds a second place to ask in step 1 and a second edge for step 2, and it lets only the edges open connections to the backends.</p>
+</section>
+
+<!-- ───────────── 3 What changed ───────────── -->
+<section>
+  <div class="head"><p class="kicker">Section 3</p>
+  <h1>What changed from Phase 1</h1></div>
+  <table>
+    <tr><th>Part</th><th>Phase 1</th><th>Phase 2</th><th>Why</th></tr>
+    <tr><td class="nw">DNS servers</td><td>Mac 1 only</td><td>Mac 1 primary, Mac 3 backup, same records. Every client lists both.</td><td>Ext. A</td></tr>
+    <tr><td class="nw">DNS records</td><td><code>address=</code>, TTL 0</td><td><code>host-record=app.nova.test,10.7.5.201,30</code> (and <code>api</code>), <code>local-ttl=30</code>, <code>local=/nova.test/</code>, <code>no-resolv</code>, <code>server=8.8.8.8</code>, query log</td><td>Ext. B; no leaks of <code>.test</code> to the internet</td></tr>
+    <tr><td class="nw">nginx timeouts</td><td>defaults (60 s)</td><td><code>proxy_connect_timeout 2s</code>, <code>proxy_read_timeout 5s</code>, <code>proxy_next_upstream error timeout</code>, <code>max_fails=1 fail_timeout=10s</code></td><td>Ext. D</td></tr>
+    <tr><td class="nw">Edge header</td><td>none</td><td><code>X-Edge: mac2</code> / <code>mac4</code> on every reply</td><td>see which edge answered</td></tr>
+    <tr><td class="nw">Edges</td><td>Mac 2 only</td><td>Standby nginx on Mac 4, own private key, certificate signed by the team CA</td><td>Ext. E</td></tr>
+    <tr><td class="nw">Backend ports</td><td>open to the whole LAN</td><td>pf rules in our own anchor <code>com.apple/nova</code>: only the edges</td><td>Ext. C</td></tr>
+    <tr><td class="nw">TLS trust</td><td>Mac 4 used a CA file in curl</td><td>Team CA trusted in the System keychain on all four Macs; no <code>-k</code></td><td>Phase 1 gap closed</td></tr>
+  </table>
+  <p>Before Phase 2 we also closed the Phase 1 items that had no evidence: CA trust on every Mac, HTTP/2 (<code>ALPN: server accepted h2</code>), wrong destination port (connection refused), one backend stopped and both backends stopped (502). Evidence: <code>MAC_*/evidence/phase1-completion/</code> and <code>MAC_4/evidence/phase2/S2-*</code>.</p>
+</section>
+
+<!-- ───────────── 4 Ext A ───────────── -->
+<section class="newpage">
+  <div class="head"><p class="kicker">Section 4 · Extension A</p>
+  <h1>Backup DNS resolver</h1></div>
+  <p>Mac 3 runs a second dnsmasq with the same records. All four Macs list Mac 1 first and Mac 3 second. Then Hrishabh stopped dnsmasq on Mac 1 at 20:35:38.</p>
+  <figure>
+    <img src="img/p2_a_stop.jpg" alt="Mac 1 dnsmasq stopped">
+    <img src="img/p2_a_failover.jpg" alt="Mac 4 resolves through backup and compares DNS failure with app failure">
+    <figcaption><b>Figure 2.</b> Top: primary DNS stopped on Mac 1. Bottom, first block (20:36:20, Mac 4): asking Mac 1 directly times out, but the system resolver still returns 10.7.5.201 and the website answers 200. Second block (20:40:05, both DNS servers stopped): the name lookup fails, yet the same site answers 200 when the address is given with <code>--resolve</code>.
+    <span class="src">MAC_1/evidence/phase2/S3-04-primary-dns-stopped.png · MAC_4/evidence/phase2/S3-07-dns-failure-vs-app-failure.png</span></figcaption>
+  </figure>
+  <p>The backup's own log proves it did the work: Mac 4 sent it 1 query at 20:31 and 13–14 per minute from 20:35, including <code>query[A] app.nova.test from 10.7.27.160 → 10.7.5.201</code> at 20:36:22 (<code>MAC_3/evidence/phase2/S3-07-backup-dns-query-log.txt</code>).</p>
+  <h2>DNS failure versus application failure</h2>
+  <table>
+    <tr><th></th><th>DNS failure (both DNS down)</th><th>Application failure (both backends down)</th></tr>
+    <tr><td>Name lookup</td><td>fails (<code>Resolving timed out</code>)</td><td>works</td></tr>
+    <tr><td>TCP + TLS to the edge</td><td>never tried, no address</td><td>work</td></tr>
+    <tr><td>Result</td><td>curl code 000; with the IP given, 200</td><td><code>HTTP/2 502</code> from nginx, <code>x-edge: mac2</code></td></tr>
+  </table>
+</section>
+
+<!-- ───────────── 5 Ext B ───────────── -->
+<section>
+  <div class="head"><p class="kicker">Section 5 · Extension B</p>
+  <h1>DNS TTL and a controlled record change</h1></div>
+  <p>Both servers now give the records a 30-second TTL. We used <code>host-record</code> instead of <code>address=</code> because with <code>address=</code> an IPv6 (AAAA) question got <code>NXDOMAIN</code>, which says the name does not exist at all; <code>host-record</code> answers <code>NOERROR</code> with no IPv6 address.</p>
+  <pre>=== S7 check from Mac 3 23 Nov 2026 22:21:20
+10.7.22.124  app.nova.test.  30  IN  A  10.7.5.201      AAAA: NOERROR
+10.7.1.218   app.nova.test.  30  IN  A  10.7.5.201      AAAA: NOERROR
+client after flush: ip_address 10.7.5.201 → HTTP/2 200, x-edge: mac2</pre>
+  <p class="note">Shortened from <code>MAC_3/evidence/phase2/S7-03-ttl30-verified-both-servers.txt</code>; Mac 1 output in <code>MAC_1/evidence/phase2/S7-02-ttl30-mac1.png</code>.</p>
+  <p>The record change itself is the edge migration in Section 8: the record was moved from Mac 2 to Mac 4 and back. A client that did not flush kept the old answer; a client that flushed switched at once.</p>
+  <table>
+    <tr><th>Change</th><th>Server switched</th><th>Flushed client (Mac 3)</th><th>Cached client (Mac 1)</th></tr>
+    <tr><td>Mac 2 → Mac 4</td><td class="nw">22:22:26</td><td>run invalid (see Section 10)</td><td>old edge until 22:23:02, new from 22:23:06</td></tr>
+    <tr><td>Mac 4 → Mac 2</td><td class="nw">22:25:48</td><td><b>new edge at 22:25:50</b></td><td>old edge until 22:26:18, new from 22:26:21</td></tr>
+  </table>
+  <p>Mac 1's DNS log shows why: its cache asked again only 41 s and 39 s after the previous lookup. So with TTL 30 the worst case on macOS was about TTL + 10 s, not exactly 30 s. In production this is why teams lower the TTL a day before a migration, then move the record, and keep the old server running until the longest TTL has passed.</p>
+</section>
+
+<!-- ───────────── 6 Ext C ───────────── -->
+<section>
+  <div class="head"><p class="kicker">Section 6 · Extension C</p>
+  <h1>Service isolation with pf</h1></div>
+  <p>Each backend Mac loads rules into its own pf anchor <code>com.apple/nova</code>, so macOS's own rules are never touched. Rules are read top to bottom; the first match wins:</p>
+  <pre>pass  in quick on lo0 all                                       # the Mac itself
+pass  in quick proto tcp from 10.7.1.218 to any port 3001       # Mac 3's own IP
+pass  in quick proto tcp from { 10.7.5.201, 10.7.27.160 } to any port 3001   # the two edges
+block drop in quick proto tcp from any to any port 3001         # everyone else: silent drop</pre>
+  <p class="note"><code>MAC_3/firewall/mac3-backend-a.edgetier.pf</code>. Mac 4 has the same rules for port 3002 (<code>MAC_4/firewall/mac4-backend-b.pf</code>). The first test used strict rules that allowed only Mac 2; the standby edge (Mac 4) was added for Extension E.</p>
+  <figure>
+    <img src="img/p2_c_allowed.jpg" alt="Mac 2 reaches both backends">
+    <img src="img/p2_c_blocked.jpg" alt="Mac 1 is blocked">
+    <figcaption><b>Figure 3.</b> Top (Mac 2, the edge): direct requests to Backend A and B return 200, and the site alternates A/B. Bottom (Mac 1, a client): ping works, but ports 3001 and 3002 time out; the site through the edge still returns 200.
+    <span class="src">MAC_2/evidence/phase2/S4-01-allowed-from-edge.png · MAC_1/evidence/phase2/S4-01-blocked-from-mac1.png</span></figcaption>
+  </figure>
+  <p>The pf counters confirm it: the edge's pass rule counted 38 packets and the block rule 6 packets, the dropped connection attempts (<code>MAC_3/evidence/phase2/mac3-S4-counters-after-block.txt</code>). Rollback was tested: we flushed only our anchor and released our own enable token, and pf went back to its starting state, Disabled (<code>mac3-S4-rollback.txt</code>). On Mac 4, pf was already enabled by another program, so there we only add or flush our anchor and never turn pf on or off.</p>
+  <p>Ping still works while the port is blocked. This shows the rule acts at the transport layer (one TCP port), not on the whole host.</p>
+</section>
+
+<!-- ───────────── 7 Ext D ───────────── -->
+<section>
+  <div class="head"><p class="kicker">Section 7 · Extension D</p>
+  <h1>High-availability failover</h1></div>
+  <p>nginx marks a backend as failed after one error (<code>max_fails=1</code>), skips it for 10 s, and retries the same request on the other backend (<code>proxy_next_upstream error timeout</code>).</p>
+  <figure>
+    <img src="img/p2_d_onlyb.jpg" alt="Backend A stopped, all requests served by B">
+    <img src="img/p2_d_502.jpg" alt="Both backends stopped, 502">
+    <figcaption><b>Figure 4.</b> Top: Backend A stopped, six requests all return 200 from Backend B. Bottom: both backends stopped, nginx itself answers <code>502</code> (with <code>x-edge: mac2</code>): DNS, TCP and TLS still work, the failure is behind the edge. After Backend A was restarted, replies alternated A/B again (<code>MAC_4/evidence/phase2/S2-06-demo1-a-returns.png</code>).
+    <span class="src">MAC_4/evidence/phase2/S2-03-demo1-a-stopped-all-b.png · S2-08-demo2-both-stopped-502.png</span></figcaption>
+  </figure>
+  <h2>How long does one unlucky request wait?</h2>
+  <p>A stopped backend refuses at once, so failover is instant. The two harder cases are a backend that accepts but never answers (we froze it with <code>kill -STOP</code>) and a backend whose packets are dropped (pf). We timed the request that hit the broken backend with the Phase 1 and Phase 2 configs.</p>
+  <table>
+    <tr><th>Fault</th><th>nginx setting</th><th>Phase 1</th><th>Phase 2</th><th>Status</th></tr>
+    <tr><td>Backend frozen</td><td><code>proxy_read_timeout</code></td><td><b>60.13 s</b></td><td><b>5.25 s</b>, 5.56 s</td><td>200, served by B</td></tr>
+    <tr><td>Packets silently dropped</td><td><code>proxy_connect_timeout</code></td><td><b>60.14 s</b></td><td><b>2.07 s</b></td><td>200, served by B</td></tr>
+  </table>
+  <p class="note">Details, discarded runs and evidence: <code>project-management/results/T2-frozen-backend-timing.md</code>, <code>T3-silent-drop-timing.md</code>. In both cases nginx's error log names the cause: <code>upstream timed out … while reading</code> / <code>while connecting to upstream</code>.</p>
+  <h2>Single point of failure</h2>
+  <p>With two backends, the remaining single point of failure is the edge: if nginx on Mac 2 stops, every client fails (Drill 2 in Section 9). The DNS servers are no longer one, thanks to Extension A. Our step towards removing it is the standby edge in Extension E. It is still a manual switch and clients wait up to one TTL. Removing the single point fully needs two edges sharing one IP address that moves automatically (for example VRRP with keepalived), or a managed load balancer with health-checked DNS.</p>
+</section>
+
+<!-- ───────────── 8 Ext E ───────────── -->
+<section class="newpage">
+  <div class="head"><p class="kicker">Section 8 · Extension E</p>
+  <h1>Edge migration with DNS</h1></div>
+  <p>Mac 4 got a second nginx with the same Phase 2 config, only <code>X-Edge: mac4</code> differs (<code>nginx/nova.standby-mac4.conf</code>). For TLS, Mac 4 created its own private key and sent only a certificate request (CSR) to Mac 2, which signed it with the team CA. The private key never needs to leave Mac 4.</p>
+  <figure>
+    <img src="img/p2_e_standby.jpg" alt="Standby nginx started on Mac 4">
+    <figcaption><b>Figure 5.</b> Mac 4: certificate and key match (same public key hash <code>2dcda60a…</code>), config test passes, nginx listens on 443 and 8080, and local requests return <code>HTTP/2 200</code>, <code>x-edge: mac4</code>, backends A and B.
+    <span class="src">MAC_4/evidence/phase2/S6a-07-standby-edge-started.png</span></figcaption>
+  </figure>
+  <p>Before moving any traffic we ran 11 checks against Mac 4 from Mac 3 (<code>MAC_3/evidence/phase2/S6a-08b-preflight-rerun.txt</code>): 200 with certificate verified by the keychain, <code>X-Edge: mac4</code>, backends <code>B A B A B A</code>, ETag gives 304, HTTP/2, same CA but a different certificate from Mac 2, and Mac 2 still unchanged.</p>
+  <figure>
+    <img src="img/p2_e_cached.jpg" alt="Mac 1 cached client during rollback, with dnsmasq log">
+    <figcaption><b>Figure 6.</b> Mac 1, cached client (no flush) during the move back to Mac 2: <code>mac4</code> until 22:26:18, then <code>mac2</code> from 22:26:21. The log underneath shows the client's DNS questions at 22:25:42 and 22:26:21. The same run on Mac 3 with a flush showed <code>mac2</code> at 22:25:50, two seconds after the switch.
+    <span class="src">MAC_1/evidence/phase2/S8-04-rollback-mac1-cached-client-and-log.png · MAC_3/evidence/phase2/S8-03-rollback-mac3-flushed-client.txt</span></figcaption>
+  </figure>
+  <p>Every probe in both directions returned 200 from one of the two edges, so no request failed during the cutover. This works because the old edge keeps running until the cached answers expire. Full timeline: <code>project-management/results/S8-dns-cutover.md</code>.</p>
+</section>
+
+<!-- ───────────── 9 Ext F ───────────── -->
+<section>
+  <div class="head"><p class="kicker">Section 9 · Extension F</p>
+  <h1>Troubleshooting method and drills</h1></div>
+  <p>The faculty fault is given at the evaluation. To prepare, we fixed one diagnosis order and wrote one <code>diag</code> function that every Mac runs: (1) DNS: ask both servers and the system resolver; (2) TCP: can we open port 443 on that address; (3) TLS: which certificate comes back; (4) HTTP: status, time, <code>X-Edge</code>, <code>X-Backend</code>. The first layer that fails is the one to fix. Then each member broke something and another member found it.</p>
+  <table>
+    <tr><th>#</th><th>Fault (who injected)</th><th>Found by</th><th>What <code>diag</code> showed</th><th>Layer</th></tr>
+    <tr><td>1</td><td>Primary DNS record points to 192.0.2.10 (Hrishabh)</td><td>Adarsh</td><td>Mac 1 answers 192.0.2.10, Mac 3 answers 10.7.5.201; client uses the wrong one; curl times out after 10 s</td><td class="nw">DNS</td></tr>
+    <tr><td>2</td><td>nginx stopped on Mac 2 (Deepanshu)</td><td>Hrishabh</td><td>DNS correct; TCP 443 fails; curl <code>Couldn't connect</code> in about 1 s</td><td class="nw">TCP / edge</td></tr>
+    <tr><td>3</td><td>Certificate for <code>wrong.nova.test</code> (Deepanshu)</td><td>Kanishk</td><td>DNS and TCP fine; curl (60) <code>no alternative certificate subject name matches</code></td><td class="nw">TLS</td></tr>
+    <tr><td>4</td><td>pf blocks the edge from Backend A (Kanishk)</td><td>Deepanshu</td><td>All 200, but only backend B and one 2.08 s request; edge → A:3001 fails; nginx log: <code>upstream timed out … connecting to upstream</code></td><td class="nw">Network, edge → backend</td></tr>
+  </table>
+  <div class="pair">
+    <img src="img/p2_f_d1.jpg" alt="Drill 1 diagnosis on Mac 4">
+    <img src="img/p2_f_d4.jpg" alt="Drill 4 diagnosis on Mac 2">
+  </div>
+  <figcaption><b>Figure 7.</b> Left: Drill 1 on Mac 4, the two DNS servers disagree. Right: Drill 4 on Mac 2, users still get 200 but only from B, and the nginx log names Backend A.
+  <span class="src">MAC_4/evidence/phase2/S9-D1-02-diag-adarsh.png · MAC_2/evidence/phase2/S9-D4-02-diag-deepanshu.png · all drills: project-management/TROUBLESHOOTING.md</span></figcaption>
+  <p style="margin-top:3mm">Drill 1 also shows a limit of Extension A: the backup DNS helps only when the primary is <i>silent</i>. A primary that answers with a wrong address is believed, and the backup is never asked. Every fault was rolled back, and a final check at 22:38 found both edges returning 200 from A and B.</p>
+</section>
+
+<!-- ───────────── 10 Findings ───────────── -->
+<section class="newpage">
+  <div class="head"><p class="kicker">Section 10</p>
+  <h1>Problems we hit and what they taught us</h1></div>
+  <table>
+    <tr><th>Problem</th><th>Cause</th><th>Fix / lesson</th></tr>
+    <tr><td>dnsmasq on Mac 1 would not start</td><td>New DHCP address; <code>listen-address</code> still had the old IP</td><td>Updated the IP. A service bound to one IP breaks when DHCP changes it.</td></tr>
+    <tr><td>Backend B could not use port 3002</td><td>A Docker (Colima) container on Mac 4 held the port</td><td>Stopped the container. Check <code>lsof</code> before starting a service.</td></tr>
+    <tr><td>Mac 3 could not resolve <code>app.nova.test</code></td><td>Public DNS servers in its list had answered "no such name" and the answer was cached</td><td>Removed public servers, flushed the cache.</td></tr>
+    <tr><td>First firewall timing test did not fail</td><td>nginx reused an idle keep-alive connection; pf is stateful and lets existing connections through</td><td>Waited 10 s for the connection to close before measuring.</td></tr>
+    <tr><td>IPv6 question got "no such name"</td><td><code>address=</code> together with <code>local=/nova.test/</code></td><td>Switched to <code>host-record</code>: now NOERROR.</td></tr>
+    <tr><td>Mac 4's private key was sent along with its CSR</td><td>The whole file selection was shared over AirDrop</td><td>Key discarded, new key pair made, CSR checked by its hash before signing. Never used for a certificate.</td></tr>
+    <tr><td>First cutover run on Mac 3 invalid</td><td>The flushed client ran before the primary DNS had switched</td><td>Repeated with a script that waits until the server answers the new IP.</td></tr>
+    <tr><td>Cached client took ~40 s, not 30 s</td><td>macOS resolver cache behaviour</td><td>Plan migrations for TTL + margin.</td></tr>
+    <tr><td><code>nc</code> said "open" for an unreachable IP</td><td>Campus Wi-Fi behaviour</td><td>Trust the end-to-end <code>curl</code> result.</td></tr>
+  </table>
+</section>
+
+<!-- ───────────── 11 Learning ───────────── -->
+<section>
+  <div class="head"><p class="kicker">Section 11</p>
+  <h1>Learning summary</h1></div>
+  <p><b>A · Backup DNS.</b> A client tries its DNS servers in order and moves to the next one only when a server does not answer. So a second resolver keeps names working when the first is down, but not when it gives a wrong answer. We also saw that DNS and the application fail differently: with DNS down the site still works by IP; with backends down DNS works but nginx returns 502.</p>
+  <p><b>B · TTL.</b> The TTL tells every cache how long it may reuse an answer. A short TTL makes changes reach clients quickly but means more DNS queries. Changes are not instant: clients that cached the old answer keep using it until it expires (about 40 s for a 30 s TTL on macOS), and only a manual flush is immediate.</p>
+  <p><b>C · Service isolation.</b> Only the edge needs to talk to the backends, so nothing else should be able to. pf rules are checked in order and the first match wins. Dropping packets makes the client wait for a timeout, which is slower to notice than a refusal. pf keeps state for connections it already allowed, so a new rule does not cut connections that are already open.</p>
+  <p><b>D · HA failover.</b> nginx can only fail over after it notices a failure, and the timeouts decide how long that takes. A stopped backend is noticed at once; a frozen or unreachable one took 60 s with defaults and 2–5 s with our settings. Two backends remove the backend as a single point of failure, but the edge itself remains one.</p>
+  <p><b>E · Edge migration.</b> DNS can move traffic to another server without touching any client, but only as fast as caches expire. The safe order is: build the standby, check it fully, move the record, keep the old edge running until the TTL has passed, and keep a rollback. Each edge has its own private key, signed by the same CA, so clients trust both.</p>
+  <p><b>F · Troubleshooting.</b> Checking layers in a fixed order (DNS, TCP, TLS, HTTP, backend) turns a vague "the site is broken" into one specific cause. The error message itself points to the layer: a timeout while resolving, connection refused, a certificate name mismatch, or a 502 from nginx.</p>
+</section>
+
+<!-- ───────────── 12 Bundle ───────────── -->
+<section>
+  <div class="head"><p class="kicker">Section 12</p>
+  <h1>Configuration bundle and evidence</h1></div>
+  <table>
+    <tr><th>Item</th><th>Location in the repository</th></tr>
+    <tr><td>nginx, Phase 1 and Phase 2 (Mac 2)</td><td><code>nginx/nova.phase1-baseline.conf</code>, <code>nginx/nova.phase2.conf</code></td></tr>
+    <tr><td>nginx, standby edge (Mac 4)</td><td><code>nginx/nova.standby-mac4.conf</code></td></tr>
+    <tr><td>dnsmasq primary / backup</td><td><code>MAC_1/dnsmasq.phase2-additions.conf</code>, <code>MAC_3/backup_dns/dnsmasq-nova-backup.conf</code></td></tr>
+    <tr><td>Firewall rules and rollback</td><td><code>MAC_3/firewall/</code>, <code>MAC_4/firewall/</code> (each with <code>ROLLBACK.md</code>)</td></tr>
+    <tr><td>TLS setup for the standby edge</td><td><code>project-management/results/S6a-standby-edge.md</code></td></tr>
+    <tr><td>Test results</td><td><code>project-management/results/</code></td></tr>
+    <tr><td>Drills and runbook</td><td><code>project-management/TROUBLESHOOTING.md</code></td></tr>
+    <tr><td>Evidence index (every requirement → file)</td><td><code>project-management/EVIDENCE_INDEX.md</code></td></tr>
+  </table>
+</section>
+
+</body>
+</html>

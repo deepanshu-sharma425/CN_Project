@@ -1,0 +1,21 @@
+=== MAC3 S8 cutover, flushed client Y 22:22:01
+host-record=app.nova.test,10.7.27.160,30
+host-record=api.nova.test,10.7.27.160,30
+dnsmasq: syntax check OK.
+Stopping `dnsmasq`... (might take a while)
+==> Successfully stopped `dnsmasq` (label: sh.brew.dnsmasq)
+Warning: Taking root:admin ownership of some dnsmasq paths:
+  /opt/homebrew/Cellar/dnsmasq/2.93/sbin
+  /opt/homebrew/Cellar/dnsmasq/2.93/sbin/dnsmasq
+  /opt/homebrew/opt/dnsmasq
+  /opt/homebrew/opt/dnsmasq/sbin
+  /opt/homebrew/var/homebrew/linked/dnsmasq
+This will require manual removal of these paths using `sudo rm` on
+brew upgrade/reinstall/uninstall.
+Root services will run Homebrew-installed software as root by default. Only use
+root services if you trust all users who can write to your Homebrew installation.
+==> Successfully started `dnsmasq` (label: sh.brew.dnsmasq)
+FLUSHED at 22:22:03
+22:22:03 10.7.5.201 x-edge: mac2
+22:22:05 10.7.5.201 x-edge: mac2
+22:22:07 10.7.5.201 x-edge: mac2

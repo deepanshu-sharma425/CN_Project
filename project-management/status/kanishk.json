@@ -1,0 +1,13 @@
+{
+  "member": "kanishk",
+  "mac": "Mac 3",
+  "stage": "S2",
+  "task": "S2: Backend A stopped/restarted for demos",
+  "status": "Passed",
+  "latestTest": "Backend A 200; app.nova.test → 10.7.5.201",
+  "evidence": [],
+  "commit": null,
+  "blockers": [],
+  "next": "T2: freeze/unfreeze Backend A",
+  "updated": "2026-11-23T20:06:00+05:30"
+}

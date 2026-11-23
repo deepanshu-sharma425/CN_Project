@@ -1,0 +1,26 @@
+=== Mac 3 backup DNS query log, Extension A failover proof (read 23 Nov 2026 20:38)
+Mac 1 dnsmasq stopped at 20:35:38 (MAC_1/evidence/phase2/S3-04-primary-dns-stopped.png)
+
+--- app.nova.test queries from Mac 4 (10.7.27.160)
+Nov 23 20:31:14 dnsmasq[25115]: 3 10.7.27.160/50390 query[A] app.nova.test from 10.7.27.160
+Nov 23 20:31:14 dnsmasq[25115]: 3 10.7.27.160/50390 config app.nova.test is 10.7.5.201
+Nov 23 20:36:22 dnsmasq[25115]: 121 10.7.27.160/55347 query[AAAA] app.nova.test from 10.7.27.160
+Nov 23 20:36:22 dnsmasq[25115]: 121 10.7.27.160/55347 config app.nova.test is NXDOMAIN
+Nov 23 20:36:22 dnsmasq[25115]: 122 10.7.27.160/62154 query[A] app.nova.test from 10.7.27.160
+Nov 23 20:36:22 dnsmasq[25115]: 122 10.7.27.160/62154 config app.nova.test is 10.7.5.201
+
+--- first query from each Mac after 20:35
+Nov 23 20:35:40 dnsmasq[25115]: 4 10.7.1.218/60531 query[HTTPS] calendar.google.com from 10.7.1.218
+Nov 23 20:35:44 dnsmasq[25115]: 13 10.7.27.160/52545 query[A] play.googleapis.com from 10.7.27.160
+Nov 23 20:35:52 dnsmasq[25115]: 21 10.7.22.124/50112 query[A] chat.cdn.whatsapp.net from 10.7.22.124
+Nov 23 20:35:56 dnsmasq[25115]: 47 10.7.5.201/8227 query[A] www.google.com from 10.7.5.201
+
+--- queries from Mac 4 to Mac 3 per minute
+   1 20:31
+  14 20:35
+  14 20:36
+  13 20:37
+
+--- status codes from Mac 3 (finding: AAAA answered NXDOMAIN because of local=/nova.test/)
+A: status: NOERROR
+AAAA: status: NXDOMAIN

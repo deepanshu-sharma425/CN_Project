@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Private Network Service Platform: Setup, Configuration and Failure Demonstration (Team Nova)</title>
+<style>
+  @page {
+    size: A4;
+    margin: 17mm 19mm 18mm 19mm;
+    @bottom-left {
+      content: "Team Nova · Private Network Service Platform";
+      font: 8pt "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #9aa0a8;
+    }
+    @bottom-right {
+      content: counter(page);
+      font: 8pt "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #9aa0a8;
+    }
+  }
+  @page :first {
+    @bottom-left { content: none; }
+    @bottom-right { content: none; }
+  }
+
+  :root {
+    --ink: #1c1f24;
+    --muted: #6b7280;
+    --faint: #9aa0a8;
+    --rule: #dfe2e7;
+    --wash: #f4f5f7;
+    --mono: "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0;
+    font: 10pt/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+  }
+  p { margin: 0 0 2.6mm; }
+  code { font: 8.6pt var(--mono); white-space: nowrap; }
+
+  /* Cover */
+  .cover {
+    height: 259mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    break-after: page;
+  }
+  .cover-top { padding-top: 58mm; }
+  .cover .title {
+    font-size: 34pt;
+    line-height: 1.12;
+    font-weight: 600;
+    letter-spacing: -0.4pt;
+    margin: 3mm 0 6mm;
+  }
+  .cover .subtitle { font-size: 14pt; margin: 0 0 3mm; }
+  .cover .meta { color: var(--muted); margin: 0; }
+  .cover table td { padding: 2.2mm 3mm 2.2mm 0; font-size: 10pt; }
+
+  /* Headings */
+  .kicker {
+    font-size: 8pt;
+    letter-spacing: 0.9pt;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 1mm;
+  }
+  h1 {
+    font-size: 16pt;
+    line-height: 1.25;
+    font-weight: 600;
+    margin: 0 0 3.2mm;
+    break-after: avoid;
+  }
+  h2 {
+    font-size: 11pt;
+    font-weight: 600;
+    margin: 5.5mm 0 1.8mm;
+    break-after: avoid;
+  }
+  section.part { break-before: page; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; break-inside: avoid; }
+  th, td {
+    text-align: left;
+    vertical-align: top;
+    padding: 1.5mm 3mm 1.5mm 0;
+    font-size: 9.1pt;
+    line-height: 1.4;
+    border-bottom: 0.3mm solid var(--rule);
+  }
+  th { font-weight: 600; border-bottom: 0.3mm solid var(--ink); white-space: nowrap; }
+  td.nw { white-space: nowrap; }
+  td code, th code { font-size: 8.3pt; }
+  table.facts td:first-child { font-weight: 600; white-space: nowrap; width: 30mm; }
+  table.wrap code { white-space: normal; }
+
+  /* Figures */
+  figure { margin: 3.5mm 0 4.5mm; break-inside: avoid; }
+  figure img { display: block; width: 100%; border-radius: 1.2mm; }
+  figure img + img { margin-top: 0.8mm; }
+  figcaption { font-size: 8.3pt; line-height: 1.4; color: var(--muted); margin-top: 1.6mm; }
+  figcaption b { color: var(--ink); font-weight: 600; }
+  .src { display: block; font: 7pt var(--mono); color: var(--faint); margin-top: 0.4mm; word-break: break-all; }
+  .cols { display: grid; gap: 6mm; align-items: start; break-inside: avoid; }
+  .cols figure, .cols table { margin-top: 0; }
+  .w55 { width: 55%; } .w65 { width: 65%; } .w75 { width: 75%; } .w85 { width: 85%; }
+
+  pre {
+    font: 8.2pt/1.5 var(--mono);
+    background: var(--wash);
+    border-radius: 1.2mm;
+    padding: 2.8mm 3.5mm;
+    margin: 2mm 0 3.5mm;
+    white-space: pre;
+    overflow: hidden;
+    break-inside: avoid;
+  }
+  ul { margin: 0 0 2.6mm; padding-left: 5mm; }
+  li { margin-bottom: 1mm; }
+
+  /* Setup order strip */
+  .flow { display: flex; align-items: stretch; gap: 1.6mm; margin: 2.5mm 0 4mm; break-inside: avoid; }
+  .flow div {
+    flex: 1;
+    border: 0.3mm solid var(--ink);
+    border-radius: 1.2mm;
+    padding: 2mm 1mm;
+    text-align: center;
+    font-size: 8.8pt;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .flow div span { display: block; font-weight: 400; font-size: 7.6pt; color: var(--muted); }
+  .flow i { align-self: center; font-style: normal; color: var(--muted); }
+
+  /* Setup steps */
+  .step {
+    display: grid;
+    grid-template-columns: 90mm 1fr;
+    gap: 5mm;
+    padding: 1.9mm 0 1.2mm;
+    border-top: 0.3mm solid var(--rule);
+    break-inside: avoid;
+  }
+  .step h3 { font-size: 10pt; font-weight: 600; margin: 0 0 0.6mm; }
+  .step .who { font-size: 7.6pt; letter-spacing: 0.7pt; text-transform: uppercase; color: var(--muted); margin: 0 0 1mm; }
+  .step p { font-size: 9.2pt; line-height: 1.4; margin: 0 0 1.5mm; }
+  .step pre { font-size: 6.9pt; padding: 2mm 2.5mm; margin: 0; }
+  .step figure { margin: 0; }
+  .step .src { font-size: 6.3pt; }
+  .steps { break-before: page; }
+  .steps .step:first-child { border-top: 0; padding-top: 0; }
+  h2.newpage { break-before: page; margin-top: 0; }
+
+  /* Before / broken / restored grids */
+  .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 4mm; align-items: start; }
+  .shots p {
+    font-size: 7.6pt;
+    font-weight: 600;
+    letter-spacing: 0.6pt;
+    text-transform: uppercase;
+    margin: 0 0 1mm;
+  }
+  .shots p span { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--muted); }
+
+  /* Diagram */
+  svg text { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; fill: #1c1f24; }
+  svg .b { font-weight: 600; font-size: 12px; }
+  svg .s { font-size: 10.5px; fill: #4b5563; }
+  svg .l { font-size: 10.5px; }
+  svg .box { fill: #fff; stroke: #1c1f24; stroke-width: 1; }
+  svg .arrow { stroke: #1c1f24; stroke-width: 1.1; fill: none; marker-end: url(#tip); }
+</style>
+</head>
+<body>
+
+<!-- ───────────── Cover ───────────── -->
+<div class="cover">
+  <div class="cover-top">
+    <p class="kicker">Computer Networks · Course Project</p>
+    <div class="title">Private Network<br>Service Platform</div>
+    <p class="subtitle">Setup, Configuration and Failure Demonstration</p>
+    <p class="meta">Team Nova · app.nova.test · October 2026</p>
+  </div>
+  <div class="cover-bottom">
+    <p class="kicker">Team members</p>
+    <table>
+      <tr><th>Name</th><th>Enrollment No.</th><th>Machine</th><th>Role</th></tr>
+      <tr><td>Hrishabh Prajapati</td><td>2401020027</td><td>Mac 1</td><td>Private DNS server (dnsmasq)</td></tr>
+      <tr><td>Deepanshu</td><td>2401010144</td><td>Mac 2</td><td>Edge server: nginx, TLS, load balancer</td></tr>
+      <tr><td>Kanishk Sharma</td><td>2401010207</td><td>Mac 3</td><td>Backend A</td></tr>
+      <tr><td>Adarsh Vashistha</td><td>2401010026</td><td>Mac 4</td><td>Backend B and test client</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ───────────── Part 1 ───────────── -->
+<section>
+  <p class="kicker">Part 1</p>
+  <h1>Team introduction and setup flow</h1>
+
+  <h2 style="margin-top: 2mm;">The team</h2>
+  <p>We are Team Nova: four students with four MacBooks. Each of us owns one machine and one part of the system.</p>
+  <table>
+    <tr><th>Member</th><th>Machine</th><th>IP address</th><th>Part of the system</th></tr>
+    <tr><td class="nw">Hrishabh Prajapati</td><td class="nw">Mac 1</td><td class="nw">10.7.8.113</td><td>Private DNS server (dnsmasq, UDP port 53). It turns the name <code>app.nova.test</code> into an IP address.</td></tr>
+    <tr><td class="nw">Deepanshu</td><td class="nw">Mac 2</td><td class="nw">10.7.7.58</td><td>Edge server (nginx, TCP port 443). It handles HTTPS and shares the requests between the two backends.</td></tr>
+    <tr><td class="nw">Kanishk Sharma</td><td class="nw">Mac 3</td><td class="nw">10.7.19.171</td><td>Backend A (Node.js, TCP port 3001).</td></tr>
+    <tr><td class="nw">Adarsh Vashistha</td><td class="nw">Mac 4</td><td class="nw">10.7.20.75</td><td>Backend B (Node.js, TCP port 3002). Mac 4 is also our test client.</td></tr>
+  </table>
+
+  <h2>What we built</h2>
+  <p>A small private web service that runs only on our own Wi-Fi network. A user opens <code>https://app.nova.test</code> and gets an answer from one of two backend servers, without ever knowing their addresses.</p>
+  <figure>
+    <svg viewBox="0 0 820 300" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Network topology and request flow">
+      <defs>
+        <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,1 L9,5 L0,9 z" fill="#1c1f24"/>
+        </marker>
+      </defs>
+      <rect x="6" y="6" width="808" height="288" rx="8" fill="none" stroke="#9aa0a8" stroke-width="1" stroke-dasharray="5 4"/>
+      <text x="20" y="27" class="s">Private Wi-Fi LAN · 10.7.0.0/19 · gateway 10.7.0.1</text>
+
+      <rect class="box" x="20" y="60" width="140" height="196" rx="5"/>
+      <text x="90" y="148" text-anchor="middle" class="b">Client</text>
+      <text x="90" y="166" text-anchor="middle" class="s">any Mac on the LAN</text>
+      <text x="90" y="182" text-anchor="middle" class="s">curl · dig · browser</text>
+
+      <rect class="box" x="320" y="50" width="180" height="72" rx="5"/>
+      <text x="410" y="74" text-anchor="middle" class="b">Mac 1 · DNS server</text>
+      <text x="410" y="92" text-anchor="middle" class="s">dnsmasq</text>
+      <text x="410" y="108" text-anchor="middle" class="s">10.7.8.113 · UDP 53</text>
+
+      <rect class="box" x="320" y="172" width="180" height="84" rx="5"/>
+      <text x="410" y="198" text-anchor="middle" class="b">Mac 2 · Edge server</text>
+      <text x="410" y="216" text-anchor="middle" class="s">nginx: TLS + load balancer</text>
+      <text x="410" y="232" text-anchor="middle" class="s">10.7.7.58 · TCP 443</text>
+
+      <rect class="box" x="640" y="118" width="160" height="68" rx="5"/>
+      <text x="720" y="141" text-anchor="middle" class="b">Mac 3 · Backend A</text>
+      <text x="720" y="158" text-anchor="middle" class="s">Node.js</text>
+      <text x="720" y="174" text-anchor="middle" class="s">10.7.19.171 · TCP 3001</text>
+
+      <rect class="box" x="640" y="212" width="160" height="68" rx="5"/>
+      <text x="720" y="235" text-anchor="middle" class="b">Mac 4 · Backend B</text>
+      <text x="720" y="252" text-anchor="middle" class="s">Node.js</text>
+      <text x="720" y="268" text-anchor="middle" class="s">10.7.20.75 · TCP 3002</text>
+
+      <line class="arrow" x1="160" y1="86" x2="319" y2="86"/>
+      <text x="240" y="78" text-anchor="middle" class="l">1 · DNS query, UDP 53</text>
+      <text x="240" y="102" text-anchor="middle" class="s">answer: 10.7.7.58</text>
+
+      <line class="arrow" x1="160" y1="214" x2="319" y2="214"/>
+      <text x="240" y="206" text-anchor="middle" class="l">2 · HTTPS, TCP 443</text>
+      <text x="240" y="230" text-anchor="middle" class="s">https://app.nova.test</text>
+
+      <line class="arrow" x1="500" y1="200" x2="639" y2="160"/>
+      <line class="arrow" x1="500" y1="228" x2="639" y2="240"/>
+      <text x="556" y="166" text-anchor="middle" class="l">3 · HTTP</text>
+      <text x="568" y="256" text-anchor="middle" class="s">round robin</text>
+    </svg>
+    <figcaption><b>Figure 1.</b> The four machines and the path of one request.</figcaption>
+  </figure>
+  <p><b>Example.</b> Mac 4 opens <code>https://app.nova.test</code>. First, Mac 1 answers that the name means 10.7.7.58. Second, Mac 4 connects to 10.7.7.58, which is Mac 2, over HTTPS. Third, Mac 2 passes the request to Backend A or Backend B and sends the reply back.</p>
+
+  <h2>Setup flow</h2>
+  <p>We set the system up from the inside out. The backends come first, because nginx needs something to forward to. DNS and nginx come next. The clients come last, because they need both. The next page goes through the six steps, with the commands we used and the check that proved each one worked.</p>
+  <div class="flow">
+    <div>1 · Network<span>all four Macs</span></div><i>→</i>
+    <div>2 · Backends<span>Mac 3, Mac 4</span></div><i>→</i>
+    <div>3 · DNS<span>Mac 1</span></div><i>→</i>
+    <div>4 · Edge<span>Mac 2</span></div><i>→</i>
+    <div>5 · Clients<span>any Mac</span></div><i>→</i>
+    <div>6 · Test<span>from a client</span></div>
+  </div>
+
+  <div class="steps">
+  <div class="step">
+    <div>
+      <p class="who">Step 1 · All four Macs</p>
+      <h3>Join one network</h3>
+      <p>All four Macs join the same Wi-Fi. Each one finds its own IP address and pings the other three.</p>
+<pre>ipconfig getifaddr en0    # this Mac's IP address
+ping -c 4 10.7.8.113      # test another Mac</pre>
+    </div>
+    <figure>
+      <img src="img/n_ping.jpg" alt="Mac 4 pings Mac 1">
+      <figcaption><b>Figure 2.</b> Check: Mac 4 pings Mac 1 with 0% packet loss.
+        <span class="src">MAC_4/evidence/02_lan_ping_reachability_all_macs.jpg</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="step">
+    <div>
+      <p class="who">Step 2 · Mac 3 and Mac 4</p>
+      <h3>Start the two backends</h3>
+      <p>Each backend is one Node.js file. There is nothing to install.</p>
+<pre>cd MAC_3/Backend_A &amp;&amp; node server.js   # on Mac 3
+cd MAC_4/Backend_B &amp;&amp; node server.js   # on Mac 4</pre>
+    </div>
+    <figure>
+      <img src="img/c_listen_a.jpg" alt="Backend A listening on port 3001">
+      <img src="img/c_listen_b.jpg" alt="Backend B listening on port 3002">
+      <figcaption><b>Figure 3.</b> Check: Backend A listens on <code>*:3001</code>, Backend B on <code>*:3002</code>.
+        <span class="src">MAC_3/evidence/mac-3_ss/Backend_A_listening_on_port_3001_not_127001.jpeg · MAC_4/evidence/03_backend_b_port_3002_listen.jpg</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="step">
+    <div>
+      <p class="who">Step 3 · Mac 1</p>
+      <h3>Start the DNS server</h3>
+      <p>dnsmasq is installed, given our config file and started as a service.</p>
+<pre>brew install dnsmasq
+cp MAC_1/dnsmasq.conf /opt/homebrew/etc/dnsmasq.conf
+sudo brew services start dnsmasq</pre>
+    </div>
+    <figure>
+      <img src="img/b_dnsmasq_listen.jpg" alt="dnsmasq listening on UDP port 53">
+      <figcaption><b>Figure 4.</b> Check: dnsmasq listens on UDP port 53 at 10.7.8.113.
+        <span class="src">MAC_1/evidence/MAC1_SS04_DNSMASQ_RUNNING.png</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="step">
+    <div>
+      <p class="who">Step 4 · Mac 2</p>
+      <h3>Start the edge server</h3>
+      <p>mkcert creates the HTTPS certificate. Then nginx gets our config file, is tested and is started.</p>
+<pre>brew install nginx mkcert
+mkcert -install
+mkdir -p /opt/homebrew/etc/nginx/certs
+cd /opt/homebrew/etc/nginx/certs &amp;&amp; mkcert app.nova.test
+cp nginx/nova.conf \
+   /opt/homebrew/etc/nginx/servers/nova.conf
+nginx -t &amp;&amp; nginx</pre>
+    </div>
+    <figure>
+      <img src="img/n_nginx_t.jpg" alt="nginx -t reports the configuration is valid">
+      <img src="img/d_nginx_443.jpg" alt="nginx listening on port 443">
+      <figcaption><b>Figure 5.</b> Check: <code>nginx -t</code> says the configuration is valid, and nginx listens on TCP port 443.
+        <span class="src">MAC_2/04_nginx_config_syntax_test.png · MAC_2/05_nginx_process_and_port_443.png</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="step">
+    <div>
+      <p class="who">Step 5 · Every client Mac</p>
+      <h3>Prepare the clients</h3>
+      <p>Each client is told to use Mac 1 as its DNS server and to trust our certificate authority.</p>
+<pre>sudo networksetup -setdnsservers Wi-Fi 10.7.8.113
+sudo security add-trusted-cert -d -r trustRoot \
+   -k /Library/Keychains/System.keychain \
+   MAC_2/certs/mkcert-rootCA.crt</pre>
+    </div>
+    <figure style="width: 62%;">
+      <img src="img/b_dig_mac4.jpg" alt="dig on Mac 4">
+      <figcaption><b>Figure 6.</b> Check on Mac 4: the DNS server is 10.7.8.113 and <code>dig</code> returns 10.7.7.58.
+        <span class="src">MAC_4/evidence/05_dns_dig_app_nova_test_success.png</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="step">
+    <div>
+      <p class="who">Step 6 · Mac 4 as the client</p>
+      <h3>Test from start to finish</h3>
+      <p>Six requests go to <code>https://app.nova.test</code>. All return 200 OK, and the backends take turns.</p>
+<pre>for i in {1..6}; do curl -sS -i https://app.nova.test/ \
+  | grep -E "HTTP/|X-Backend"; done</pre>
+    </div>
+    <figure style="width: 68%;">
+      <img src="img/d_round_robin.jpg" alt="Six requests alternate between Backend B and Backend A">
+      <figcaption><b>Figure 7.</b> Check: six requests, all 200 OK. <code>X-Backend</code> alternates B, A, B, A, B, A.
+        <span class="src">MAC_4/evidence/07_load_balancing_round_robin_alternation.jpg</span></figcaption>
+    </figure>
+  </div>
+  </div>
+</section>
+
+<!-- ───────────── Part 2 ───────────── -->
+<section class="part">
+  <p class="kicker">Part 2</p>
+  <h1>How the configuration works</h1>
+  <p>The whole system is controlled by three small pieces of configuration: one on the DNS server, one in each backend program, and one on the edge server. For each piece we show the setting, explain it in simple words, and give a real example.</p>
+
+  <h2>1. DNS server on Mac 1</h2>
+  <p>Three lines in <code>/opt/homebrew/etc/dnsmasq.conf</code> do all the work.</p>
+  <figure>
+    <img src="img/n_dnsmasq_conf.jpg" alt="The three dnsmasq configuration lines on Mac 1">
+    <figcaption><b>Figure 8.</b> The three configuration lines, printed on Mac 1.
+      <span class="src">MAC_1/evidence/MAC1_SS03_DNSMASQ_CONFIG.png</span></figcaption>
+  </figure>
+  <table>
+    <tr><th>Setting</th><th>In simple words</th></tr>
+    <tr><td class="nw"><code>address=/app.nova.test/10.7.7.58</code></td><td>When someone asks “where is app.nova.test?”, answer 10.7.7.58. That is Mac 2.</td></tr>
+    <tr><td class="nw"><code>address=/api.nova.test/10.7.7.58</code></td><td>Give the same answer for the name api.nova.test.</td></tr>
+    <tr><td class="nw"><code>listen-address=127.0.0.1,10.7.8.113</code></td><td>Listen on Mac 1's Wi-Fi address, so that other Macs can ask. With only 127.0.0.1 here, only Mac 1 itself could ask.</td></tr>
+    <tr><td class="nw">Client DNS server = 10.7.8.113</td><td>This is set on every client Mac. It tells the client to send its DNS questions to Mac 1.</td></tr>
+  </table>
+  <div class="cols" style="grid-template-columns: 1fr 1.25fr;">
+    <div>
+      <p><b>Example.</b> Mac 2 runs <code>dig app.nova.test</code>.</p>
+      <ul>
+        <li>The ANSWER SECTION says 10.7.7.58. This is the first config line at work.</li>
+        <li>The SERVER line says 10.7.8.113#53. So the answer came from Mac 1, on port 53.</li>
+        <li><code>status: NOERROR</code> means the lookup worked.</li>
+      </ul>
+    </div>
+    <figure>
+      <img src="img/b_dig_mac2.jpg" alt="dig on Mac 2">
+      <figcaption><b>Figure 9.</b> Mac 2 resolves the name through Mac 1.
+        <span class="src">MAC_2/06_dns_dig_app_nova_test.png</span></figcaption>
+    </figure>
+  </div>
+
+  <h2 class="newpage">2. Backends on Mac 3 and Mac 4</h2>
+  <p>The backend settings are a few lines in each <code>server.js</code>. These are selected lines from Backend A. Backend B uses the same settings with port 3002 and the label B.</p>
+<pre>const HOST = '0.0.0.0'; // all interfaces, so other Macs on the LAN can reach it
+const PORT = 3001;
+const BACKEND = 'A';
+  ⋮
+const all = { 'X-Backend': BACKEND, ...headers };
+  ⋮
+const cacheHeaders = { 'Cache-Control': 'public, max-age=60', ETag: HOME_ETAG };</pre>
+  <table>
+    <tr><th>Setting</th><th>In simple words</th></tr>
+    <tr><td class="nw"><code>HOST = '0.0.0.0'</code></td><td>Accept connections on every network interface. With 127.0.0.1, only the same Mac could connect, and nginx on Mac 2 would not reach the backend.</td></tr>
+    <tr><td class="nw"><code>PORT = 3001</code></td><td>The port number of the service. Backend B uses 3002. nginx must use the same numbers.</td></tr>
+    <tr><td class="nw"><code>'X-Backend': BACKEND</code></td><td>Every reply carries the label <code>X-Backend: A</code> or <code>X-Backend: B</code>. This is how we can see which backend answered.</td></tr>
+    <tr><td class="nw"><code>'Cache-Control'</code>, <code>ETag</code></td><td>The home page may be reused for 60 seconds. The ETag is a fingerprint of the page. The live <code>/api/status</code> reply is marked <code>no-store</code> instead.</td></tr>
+  </table>
+  <p><b>Example.</b> On Mac 3, <code>curl -i http://localhost:3001/</code> returns 200 OK with <code>X-Backend: A</code>, <code>Cache-Control: public, max-age=60</code> and an ETag. The status endpoint returns <code>Cache-Control: no-store</code>.</p>
+  <figure>
+    <img src="img/c_endpoints_a.jpg" alt="Both endpoints of Backend A">
+    <figcaption><b>Figure 10.</b> Backend A answering on both endpoints with its label and cache headers.
+      <span class="src">MAC_3/evidence/mac-3_ss/both_endpoints_return_200_with_X-Backend_A.jpeg</span></figcaption>
+  </figure>
+
+  <h2 class="newpage">3. Edge server on Mac 2</h2>
+  <p>nginx reads one file, <code>nova.conf</code>. Figure 11 shows the file as it is installed on Mac 2. It is the same as <code>nginx/nova.conf</code> in our repository.</p>
+  <div class="cols" style="grid-template-columns: 1fr 1.12fr;">
+    <figure>
+      <img src="img/n_nginx_conf.jpg" alt="nginx configuration on Mac 2">
+      <figcaption><b>Figure 11.</b> The nginx configuration on Mac 2.
+        <span class="src">MAC_2/03_nginx_virtual_host_config.png</span></figcaption>
+    </figure>
+    <table>
+      <tr><th>Setting</th><th>In simple words</th></tr>
+      <tr><td class="nw"><code>upstream</code></td><td>The list of backends: Mac 3 on port 3001 and Mac 4 on port 3002. No method is written, so nginx uses its default, round robin: the backends take turns.</td></tr>
+      <tr><td class="nw"><code>listen 443 ssl</code></td><td>Accept HTTPS connections on port 443.</td></tr>
+      <tr><td class="nw"><code>server_name</code></td><td>This block handles requests for the name app.nova.test.</td></tr>
+      <tr><td class="nw"><code>ssl_certificate</code><br><code>ssl_certificate_key</code></td><td>The certificate and its private key. nginx uses them to prove who it is and to encrypt the connection.</td></tr>
+      <tr><td class="nw"><code>proxy_pass</code></td><td>Pass every request to the backend group, over plain HTTP.</td></tr>
+      <tr><td class="nw"><code>proxy_set_header</code></td><td>Tell the backend the original host name, the client's address and the protocol.</td></tr>
+      <tr><td class="nw"><code>listen 8080</code></td><td>The first block offers the same site on port 8080 without encryption.</td></tr>
+    </table>
+  </div>
+  <p><b>Example.</b> Two requests are sent to <code>https://app.nova.test/</code>. The first is answered by Backend B and the second by Backend A. That is the <code>upstream</code> block at work. Both replies still carry the backend's own <code>Cache-Control</code> and <code>ETag</code>, so nginx passes the headers through unchanged.</p>
+  <figure>
+    <img src="img/f_headers.jpg" alt="Two requests through the edge, answered by Backend B and Backend A">
+    <figcaption><b>Figure 12.</b> Two requests through the edge, run on Mac 2: one answer from each backend.
+      <span class="src">MAC_2/09_http_response_headers_and_etag.png</span></figcaption>
+  </figure>
+
+  <h2>4. The HTTPS certificate</h2>
+  <p>nginx needs a certificate for the name <code>app.nova.test</code>. We made it on Mac 2 with mkcert:</p>
+<pre>mkcert -install          # creates our own local certificate authority (CA)
+mkcert app.nova.test     # creates app.nova.test.pem and app.nova.test-key.pem</pre>
+  <p>These are exactly the two files named in the nginx configuration. A client accepts the certificate only if it trusts our CA, so the public CA certificate (<code>MAC_2/certs/mkcert-rootCA.crt</code>) must be trusted on each client Mac. The private keys stay on Mac 2 and are not in the repository.</p>
+
+  <h2 class="newpage">5. Example: one request from start to finish</h2>
+  <p>Figure 13 is one real request from Mac 4, run with <code>curl -v https://app.nova.test/</code> and without the <code>-k</code> flag. The table below links each part of the output to the setting that causes it.</p>
+  <figure>
+    <img src="img/n_curl_full.jpg" alt="curl -v from Mac 4 showing DNS, TLS and the HTTP reply">
+    <figcaption><b>Figure 13.</b> One complete request from Mac 4. On Mac 4, curl is the Anaconda build and checks certificates against its own CA file.
+      <span class="src">MAC_4/evidence/06_https_curl_v_success.png</span></figcaption>
+  </figure>
+  <table class="wrap">
+    <tr><th>In the output</th><th>What it means</th><th>Setting behind it</th></tr>
+    <tr><td><code>IPv4: 10.7.7.58</code></td><td>The name was turned into Mac 2's address.</td><td>The dnsmasq record on Mac 1, and the DNS server setting on Mac 4.</td></tr>
+    <tr><td><code>Trying 10.7.7.58:443</code></td><td>Mac 4 connects to Mac 2 on the HTTPS port.</td><td><code>listen 443 ssl</code></td></tr>
+    <tr><td><code>SSL connection using TLSv1.3</code></td><td>The connection is encrypted.</td><td><code>ssl_certificate</code> and <code>ssl_certificate_key</code></td></tr>
+    <tr><td><code>subjectAltName … matches</code><br><code>SSL certificate verified</code></td><td>The certificate is for the right name and is trusted.</td><td>The mkcert certificate for app.nova.test, and the trusted CA on the client.</td></tr>
+    <tr><td><code>Server: nginx/1.31.6</code></td><td>The reply came through nginx.</td><td>The port 443 block in nginx, which forwards with <code>proxy_pass</code>.</td></tr>
+    <tr><td><code>X-Backend: B</code></td><td>This request was served by Backend B.</td><td><code>upstream</code> chose Mac 4, and the backend added its label.</td></tr>
+    <tr><td><code>Cache-Control: public, max-age=60</code></td><td>The page may be cached for 60 seconds.</td><td>The backend's cache setting, passed through by nginx.</td></tr>
+  </table>
+</section>
+
+<!-- ───────────── Part 3 ───────────── -->
+<section class="part">
+  <p class="kicker">Part 3 · D3</p>
+  <h1>Failure demonstration</h1>
+  <p>A system is understood best when it breaks. We broke one setting at a time, on purpose, and watched which layer failed and which layers kept working. Every test followed the same four steps.</p>
+  <div class="flow">
+    <div>1 · Check<span>it works</span></div><i>→</i>
+    <div>2 · Break<span>one setting</span></div><i>→</i>
+    <div>3 · Observe<span>what fails, what still works</span></div><i>→</i>
+    <div>4 · Restore<span>and check again</span></div>
+  </div>
+
+  <h2>Failure 1: wrong DNS server on the client</h2>
+  <table class="facts">
+    <tr><td>Setting we broke</td><td>The DNS server setting on Mac 4. We changed it from 10.7.8.113 (Mac 1) to the public server 8.8.8.8 and cleared the DNS cache.</td></tr>
+    <tr><td>What we saw</td><td><code>dig</code> returned NXDOMAIN, which means “this name does not exist”. curl stopped with “Could not resolve host”. But <code>ping 10.7.7.58</code> still got 4 replies out of 4.</td></tr>
+    <tr><td>Why</td><td>8.8.8.8 is a public DNS server. It has never heard of our private name. The network itself was fine, so Mac 4 could still reach Mac 2 by its IP address.</td></tr>
+    <tr><td>Lesson</td><td>DNS and IP are independent. A name lookup can fail while the network still works.</td></tr>
+    <tr><td>Restore</td><td>We set the DNS server back to 10.7.8.113. <code>dig</code> returned 10.7.7.58 again and curl returned 200 OK. Working at 20:20, broken at 20:23, restored at 20:24 on 5 October 2026.</td></tr>
+  </table>
+  <figure>
+    <div class="shots">
+      <div><p>A · Before <span>DNS server is 10.7.8.113, answer is 10.7.7.58</span></p><img src="img/n_f1_before.jpg" alt="Before: lookup works"></div>
+      <div><p>B · Broken <span>DNS set to 8.8.8.8, answer is NXDOMAIN</span></p><img src="img/x_dns_server_dig.jpg" alt="Broken: lookup fails"></div>
+      <div><p>C · Broken <span>curl fails, but ping to Mac 2 works</span></p><img src="img/x_dns_server_ping.jpg" alt="Broken: curl fails but ping works"></div>
+      <div><p>D · Restored <span>lookup works, curl returns 200 OK</span></p><img src="img/n_f1_restored.jpg" alt="Restored: lookup and curl work again"></div>
+    </div>
+    <figcaption><b>Figure 14.</b> Failure 1 on Mac 4, from working to broken to restored.
+      <span class="src">MAC_4/evidence/15_failure_dns_1_before.png · 16_failure_dns_2_broken.png · 17_failure_dns_3_restored.png</span></figcaption>
+  </figure>
+
+  <h2 class="newpage">Failure 2: DNS record points to a wrong IP address</h2>
+  <table class="facts">
+    <tr><td>Setting we broke</td><td>The app.nova.test record in <code>dnsmasq.conf</code> on Mac 1. We changed its address from 10.7.7.58 to 10.7.20.99 and restarted dnsmasq (Figure 15).</td></tr>
+    <tr><td>What we saw</td><td><code>dig</code> returned NOERROR with the answer 10.7.20.99. There was no error at all, but the answer was wrong. <code>ping 10.7.7.58</code> still got 2 replies out of 2, so Mac 2 was still running.</td></tr>
+    <tr><td>Why</td><td>DNS gives back whatever is written in its records. It does not check that the address belongs to the right machine.</td></tr>
+    <tr><td>Lesson</td><td>DNS is a directory, not a connection. A wrong record sends clients to the wrong place, even when every server is healthy.</td></tr>
+    <tr><td>Restore</td><td>We changed the record back to 10.7.7.58 and restarted dnsmasq. <code>dig</code> returned 10.7.7.58 again. Working at 21:42, broken at 21:45, restored at 21:46 on 5 October 2026.</td></tr>
+  </table>
+  <figure>
+    <img src="img/n_f2_change.jpg" alt="The command that changed the DNS record">
+    <figcaption><b>Figure 15.</b> The change on Mac 1: one <code>sed</code> command replaces 10.7.7.58 with 10.7.20.99.
+      <span class="src">MAC_1/evidence/MAC1_SS08_WRONG_DNS_RECORD.png</span></figcaption>
+  </figure>
+  <figure style="width: 74%;">
+    <div class="shots">
+      <div><p>A · Before <span>the answer is 10.7.7.58</span></p><img src="img/n_f2_before.jpg" alt="Before: correct record"></div>
+      <div><p>B · Broken <span>the answer is 10.7.20.99</span></p><img src="img/x_dns_record_dig.jpg" alt="Broken: wrong answer"></div>
+      <div><p>C · Broken <span>Mac 2 still answers ping</span></p><img src="img/x_dns_record_ping.jpg" alt="Broken: Mac 2 still reachable"></div>
+      <div><p>D · Restored <span>10.7.7.58 again</span></p><img src="img/n_f2_restored.jpg" alt="Restored: correct answer"></div>
+    </div>
+    <figcaption><b>Figure 16.</b> Failure 2 on Mac 1, from working to broken to restored.
+      <span class="src">MAC_1/evidence/MAC1_SS08a_DNS_RECORD_BEFORE.png · MAC1_SS08_WRONG_DNS_RECORD.png · MAC1_SS08b_DNS_RECORD_RESTORED.png</span></figcaption>
+  </figure>
+
+  <h2>Three more scenarios</h2>
+  <p>The project brief lists five failure scenarios. These three have not been captured as screenshots yet, so the table gives the expected result.</p>
+  <table>
+    <tr><th>Scenario</th><th>Expected result</th></tr>
+    <tr><td class="nw">One backend is stopped</td><td>nginx cannot connect to the stopped backend and sends every request to the other one. The client still gets 200 OK, always with the same <code>X-Backend</code> value.</td></tr>
+    <tr><td class="nw">Both backends are stopped</td><td>DNS and HTTPS to Mac 2 still work, but nginx has no backend to use and returns <code>502 Bad Gateway</code>.</td></tr>
+    <tr><td class="nw">Wrong destination port</td><td>Mac 2 still answers ping, but a connection to a port where nothing listens is refused or times out. An IP address and a port are separate things.</td></tr>
+  </table>
+</section>
+
+</body>
+</html>

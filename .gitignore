@@ -4,3 +4,8 @@
 
 # macOS
 .DS_Store
+
+# Phase 2: certificate requests and local backup copies must never be committed
+*.csr
+*.key
+nova-backups/

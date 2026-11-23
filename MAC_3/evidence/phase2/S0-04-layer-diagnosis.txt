@@ -1,0 +1,18 @@
+=== Layer-by-layer diagnosis from Mac 3 (10.7.1.218), 23 Nov 2026 19:45
+Symptom: Mac 4 "dscacheutil -q host -a name app.nova.test" returned nothing; curl loop printed nothing.
+
+--- Mac 3 DNS list
+10.7.8.113 / 1.1.1.1 / 8.8.8.8            (old list: Mac 3 not yet switched)
+--- 1. DNS: dig @10.7.22.124 app.nova.test
+;; connection timed out; no servers could be reached     -> Mac 1 dnsmasq not serving on its new IP
+--- 1b. dig @10.7.8.113 (old Mac 1 IP)
+;; connection timed out                                   -> old address no longer exists
+--- 2. TCP: nc -vz -G 3 10.7.5.201 443
+Connection to 10.7.5.201 port 443 [tcp/https] succeeded!  -> Mac 2 nginx reachable
+--- 3/4. HTTPS via --resolve to 10.7.5.201 (-k for diagnosis only)
+HTTP/1.1 502 Bad Gateway / Server: nginx/1.31.6           -> edge works, upstream list stale
+--- 5a. Backend A: 3001 not listening                     -> Mac 3 backend not started yet
+--- 5b. Backend B direct: http://10.7.27.160:3002/api/status -> 200
+
+Conclusion: fault is at the DNS layer (Mac 1 listen-address still the old IP) plus a stale nginx upstream and Backend A not started.
+Fix: CP1 blocks 2.1 (Mac 1), 2.2 (Mac 2), 2.3 (Mac 3), 2.4 (Mac 4 DNS).

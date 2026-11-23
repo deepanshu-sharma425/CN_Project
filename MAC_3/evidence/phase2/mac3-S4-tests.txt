@@ -1,0 +1,24 @@
+=== MAC3 S4 tests 20:45:37
+--- Mac 4 port 3002 from Mac 3 (should TIME OUT)
+nc: connectx to 10.7.27.160 port 3002 (tcp) failed: Operation timed out
+--- my own Backend A via my IP (should be 200)
+200
+--- my own Backend A via 127.0.0.1 (should be 200)
+200
+--- counters AFTER tests
+@0 pass in quick on lo0 all flags S/SA keep state
+  [ Owner : nil          Priority : 0     ]
+  [ Evaluations: 4146      Packets: 155       Bytes: 58183       States: 8     ]
+  [ Inserted: uid 0 pid 27909 ]
+@1 pass in quick inet proto tcp from 10.7.1.218 to any port = 3001 flags S/SA keep state
+  [ Owner : nil          Priority : 0     ]
+  [ Evaluations: 4114      Packets: 0         Bytes: 0           States: 0     ]
+  [ Inserted: uid 0 pid 27909 ]
+@2 pass in quick inet proto tcp from 10.7.5.201 to any port = 3001 flags S/SA keep state
+  [ Owner : nil          Priority : 0     ]
+  [ Evaluations: 710       Packets: 26        Bytes: 2806        States: 2     ]
+  [ Inserted: uid 0 pid 27909 ]
+@3 block drop in quick proto tcp from any to any port = 3001
+  [ Owner : nil          Priority : 0     ]
+  [ Evaluations: 1769      Packets: 0         Bytes: 0           States: 0     ]
+  [ Inserted: uid 0 pid 27909 ]

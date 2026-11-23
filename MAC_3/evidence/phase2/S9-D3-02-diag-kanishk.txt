@@ -1,0 +1,38 @@
+=== DRILL 3 diag on Kanishks-MacBook-Pro-2 22:35:15
+[1 DNS]
+  @10.7.22.124 -> 10.7.5.201 
+  @10.7.1.218 -> 10.7.5.201 
+  this Mac uses -> 10.7.5.201
+[2 TCP 443]
+  open
+[3 TLS]
+  subject=O=mkcert development certificate, OU=deepanshu.@Deepanshus-MacBook-Pro-3.local (Deepanshu .)
+[4 HTTP]
+  curl: (60) SSL: no alternative certificate subject name matches target host name 'app.nova.test'
+More details here: https://curl.se/docs/sslcerts.html
+
+  curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+  000 0.037218s edge= backend=
+  curl: (60) SSL: no alternative certificate subject name matches target host name 'app.nova.test'
+More details here: https://curl.se/docs/sslcerts.html
+
+  curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+  000 0.021447s edge= backend=
+  curl: (60) SSL: no alternative certificate subject name matches target host name 'app.nova.test'
+More details here: https://curl.se/docs/sslcerts.html
+
+  curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+  000 0.050469s edge= backend=
+  curl: (60) SSL: no alternative certificate subject name matches target host name 'app.nova.test'
+More details here: https://curl.se/docs/sslcerts.html
+
+  curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+  000 0.024501s edge= backend=

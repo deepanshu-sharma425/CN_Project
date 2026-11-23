@@ -1,0 +1,19 @@
+=== S6a preflight E1-E11 from Mac 3 (10.7.1.218) 23 Nov 2026 22:19:01
+E1 (Mac 4 nginx -t ok, *:443 listening): see MAC_4 S6a-07-standby-edge-started.png
+E2 cert checks: cert pubkey hash = key hash = 2dcda60a... (MAC_2 S6a-05, MAC_4 S6a-07)
+E3 /api/status code + ssl_verify_result: 200 0
+E4 headers + body:
+HTTP/2 200 
+x-backend: B
+x-edge: mac4
+{
+
+E5 / : 200
+E6 six requests X-Backend: B A B A B A 
+E7 ETag from backend B: "7a659000e4b0e479860dd8be81c682538bcd217b"
+   HTTP/2 200  x-backend: A 
+   HTTP/2 304  x-backend: B 
+E8 security verify-cert (basic policy, Keychain trust):
+   10.7.27.160: ...certificate verification successful.
+   10.7.5.201: ...certificate verification successful.
+E10 HTTP/2: * ALPN: server accepted h2

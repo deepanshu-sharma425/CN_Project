@@ -1,0 +1,24 @@
+=== MAC3 S8 rollback, flushed client Y 22:25:44
+before: x-edge: mac4
+waiting for Mac 1 DNS to switch...
+Mac 1 DNS switched at 22:25:48
+host-record=app.nova.test,10.7.5.201,30
+host-record=api.nova.test,10.7.5.201,30
+dnsmasq: syntax check OK.
+Stopping `dnsmasq`... (might take a while)
+==> Successfully stopped `dnsmasq` (label: sh.brew.dnsmasq)
+Warning: Taking root:admin ownership of some dnsmasq paths:
+  /opt/homebrew/Cellar/dnsmasq/2.93/sbin
+  /opt/homebrew/Cellar/dnsmasq/2.93/sbin/dnsmasq
+  /opt/homebrew/opt/dnsmasq
+  /opt/homebrew/opt/dnsmasq/sbin
+  /opt/homebrew/var/homebrew/linked/dnsmasq
+This will require manual removal of these paths using `sudo rm` on
+brew upgrade/reinstall/uninstall.
+Root services will run Homebrew-installed software as root by default. Only use
+root services if you trust all users who can write to your Homebrew installation.
+==> Successfully started `dnsmasq` (label: sh.brew.dnsmasq)
+FLUSHED at 22:25:50
+22:25:50 10.7.5.201 x-edge: mac2
+22:25:53 10.7.5.201 x-edge: mac2
+22:25:55 10.7.5.201 x-edge: mac2

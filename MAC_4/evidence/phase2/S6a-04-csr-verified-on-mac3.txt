@@ -1,0 +1,10 @@
+=== S6a CSR relay check on Mac 3 (Kanishk) 23 Nov 2026 22:13
+Attempt 1 (22:05): Mac 4 AirDropped the CSR together with its private key to Mac 3. Key discarded; Mac 4 generated a new key pair. Old pubkey hash 42cf502a... is NOT used.
+Attempt 2 (22:12): CSR only.
+-rw-r--r--@ 956 Nov 23 22:12 ~/Downloads/app.nova.test.csr
+Certificate request self-signature verify OK
+subject=CN=app.nova.test
+                X509v3 Subject Alternative Name: 
+                    DNS:app.nova.test
+pubkey SHA2-256(stdin)= 2dcda60a288e547f3cd49cb24607ec53be4b8d2cd21721342645590544363bac
+PRIVATE KEY blocks in file: 0
