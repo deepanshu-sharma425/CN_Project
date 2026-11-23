@@ -2,12 +2,12 @@
   "member": "adarsh",
   "mac": "Mac 4",
   "stage": "S2",
-  "task": "S1 wrong-port demo passed",
+  "task": "S2 demos 1-2 done as client",
   "status": "Passed",
-  "latestTest": "8443 → Connection refused",
+  "latestTest": "A stopped → 6/6 B; both stopped → 502",
   "evidence": [],
   "commit": null,
   "blockers": [],
-  "next": "S2: client for failover demos and T2 timing",
-  "updated": "2026-11-23T19:55:00+05:30"
+  "next": "T2 timer runs",
+  "updated": "2026-11-23T20:06:25+05:30"
 }

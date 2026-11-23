@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "asOf": "2026-11-23T19:57:00+05:30",
+  "asOf": "2026-11-23T20:08:00+05:30",
   "source": "Coordinator (Kanishk, Mac 3): S0 inventory and CP1 completed; screenshots relayed from Macs 1, 2, 4.",
   "currentStage": "S2",
-  "nextMilestone": "S2 (Extension D part 1): Phase 2 nginx config on Mac 2, one-backend and both-backend demos, T2 timing",
+  "nextMilestone": "S2: T2 timing test (Phase 1 baseline vs Phase 2 config, Backend A frozen)",
   "inventory": {
     "mac1": {
       "ip": "10.7.22.124",
@@ -38,38 +38,38 @@
     "deepanshu": {
       "mac": "Mac 2",
       "stage": "S2",
-      "task": "S1 done: http2 on, phase1 baseline saved",
+      "task": "S2: phase2 config live, demos 1-2 logged",
       "status": "Passed",
-      "latestTest": "nginx -t ok, reloaded",
+      "latestTest": "502 with x-edge: mac2; error.log both refused",
       "evidence": [],
       "commit": null,
       "blockers": [],
-      "next": "S2: install nova.phase2.conf",
-      "updated": "2026-11-23T19:52:00+05:30"
+      "next": "T2: swap baseline/phase2 configs",
+      "updated": "2026-11-23T20:06:00+05:30"
     },
     "kanishk": {
       "mac": "Mac 3",
       "stage": "S2",
-      "task": "S1 CA trust done",
+      "task": "S2: Backend A stopped/restarted for demos",
       "status": "Passed",
       "latestTest": "Backend A 200; app.nova.test → 10.7.5.201",
       "evidence": [],
       "commit": null,
       "blockers": [],
-      "next": "S2: stop/freeze Backend A on signal",
-      "updated": "2026-11-23T19:57:00+05:30"
+      "next": "T2: freeze/unfreeze Backend A",
+      "updated": "2026-11-23T20:06:00+05:30"
     },
     "adarsh": {
       "mac": "Mac 4",
       "stage": "S2",
-      "task": "S1 wrong-port demo passed",
+      "task": "S2 demos 1-2 done as client",
       "status": "Passed",
-      "latestTest": "8443 → Connection refused",
+      "latestTest": "A stopped → 6/6 B; both stopped → 502",
       "evidence": [],
       "commit": null,
       "blockers": [],
-      "next": "S2: client for failover demos and T2 timing",
-      "updated": "2026-11-23T19:55:00+05:30"
+      "next": "T2 timer runs",
+      "updated": "2026-11-23T20:06:25+05:30"
     }
   },
   "tasks": {
@@ -82,7 +82,12 @@
     "S1-trust-m3": "Passed",
     "S1-trust-m4": "Passed",
     "S1-http2": "Passed",
-    "S1-wrongport": "Passed"
+    "S1-wrongport": "Passed",
+    "S2-config": "Passed",
+    "S2-docdemo": "Passed",
+    "S1-onebackend": "Passed",
+    "S1-bothdown": "Passed",
+    "S1-errlog": "Passed"
   },
   "requirements": {
     "P1-A1": {
@@ -158,12 +163,14 @@
       "evidence": "MAC_1/evidence/MAC1_SS08a, SS08, SS08b"
     },
     "P1-X3": {
-      "status": "missing",
-      "note": "to be captured in S2 (same procedure as Extension D: stop Backend A)"
+      "status": "verified",
+      "evidence": "MAC_4/evidence/phase2/S2-02-demo1-before.png, S2-03-demo1-a-stopped-all-b.png, S2-06-demo1-a-returns.png; MAC_2/evidence/phase2/S2-04-demo1-errorlog.png",
+      "note": "A stopped 19:59:43 → 6/6 200 from B; A back at 20:02:49"
     },
     "P1-X4": {
-      "status": "missing",
-      "note": "to be captured in S2 (both backends stopped → 502 with X-Edge)"
+      "status": "verified",
+      "evidence": "MAC_4/evidence/phase2/S2-08-demo2-both-stopped-502.png; MAC_2/evidence/phase2/S2-08-demo2-errorlog-both-refused.png; MAC_4/evidence/phase2/S2-10-demo2-restored.png",
+      "note": "HTTP/2 502 from nginx with x-edge: mac2 at 20:04:41; one request (*61) tried A then B"
     },
     "P1-X5": {
       "status": "verified",
@@ -214,14 +221,18 @@
       "status": "not-started"
     },
     "P2-D1": {
-      "status": "not-started",
-      "note": "Passive failover already active through nginx defaults; not demonstrated"
+      "status": "verified",
+      "evidence": "MAC_2/evidence/phase2/S2-01-phase2-config-diff-headers.png; S2-04-demo1-errorlog.png",
+      "note": "passive health checks: max_fails=1 fail_timeout=10s, proxy_next_upstream error timeout; one connect() failure then A skipped"
     },
     "P2-D2": {
-      "status": "not-started"
+      "status": "verified",
+      "evidence": "MAC_4/evidence/phase2/S2-03-demo1-a-stopped-all-b.png"
     },
     "P2-D3": {
-      "status": "not-started"
+      "status": "verified",
+      "evidence": "MAC_4/evidence/phase2/S2-06-demo1-a-returns.png",
+      "note": "A reappears within the 10 s fail_timeout window"
     },
     "P2-D4": {
       "status": "not-started"

@@ -2,12 +2,12 @@
   "member": "kanishk",
   "mac": "Mac 3",
   "stage": "S2",
-  "task": "S1 CA trust done",
+  "task": "S2: Backend A stopped/restarted for demos",
   "status": "Passed",
   "latestTest": "Backend A 200; app.nova.test → 10.7.5.201",
   "evidence": [],
   "commit": null,
   "blockers": [],
-  "next": "S2: stop/freeze Backend A on signal",
-  "updated": "2026-11-23T19:57:00+05:30"
+  "next": "T2: freeze/unfreeze Backend A",
+  "updated": "2026-11-23T20:06:00+05:30"
 }

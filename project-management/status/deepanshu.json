@@ -2,12 +2,12 @@
   "member": "deepanshu",
   "mac": "Mac 2",
   "stage": "S2",
-  "task": "S1 done: http2 on, phase1 baseline saved",
+  "task": "S2: phase2 config live, demos 1-2 logged",
   "status": "Passed",
-  "latestTest": "nginx -t ok, reloaded",
+  "latestTest": "502 with x-edge: mac2; error.log both refused",
   "evidence": [],
   "commit": null,
   "blockers": [],
-  "next": "S2: install nova.phase2.conf",
-  "updated": "2026-11-23T19:52:00+05:30"
+  "next": "T2: swap baseline/phase2 configs",
+  "updated": "2026-11-23T20:06:00+05:30"
 }
