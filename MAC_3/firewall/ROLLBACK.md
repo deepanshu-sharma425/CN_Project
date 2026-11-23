@@ -15,7 +15,8 @@ sudo pfctl -s References
 
 | Date | Token | Loaded file |
 |---|---|---|
-| | | |
+| 23 Nov 2026 20:44:15 | 602002873809259130 | mac3-backend-a.strict.pf (baseline: pf Disabled, no references) — released 20:48:01 (rollback test, pf back to Disabled) |
+| 23 Nov 2026 20:48:52 | 14918833353710140916 | mac3-backend-a.edgetier.pf (CP5b) — **current** |
 
 ## Rollback (in this order)
 ```

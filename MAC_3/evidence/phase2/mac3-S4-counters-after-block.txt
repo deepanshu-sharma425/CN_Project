@@ -1,0 +1,16 @@
+@0 pass in quick on lo0 all flags S/SA keep state
+  [ Owner : nil          Priority : 0     ]
+  [ Evaluations: 23719     Packets: 287       Bytes: 119843      States: 4     ]
+  [ Inserted: uid 0 pid 27909 ]
+@1 pass in quick inet proto tcp from 10.7.1.218 to any port = 3001 flags S/SA keep state
+  [ Owner : nil          Priority : 0     ]
+  [ Evaluations: 23685     Packets: 0         Bytes: 0           States: 0     ]
+  [ Inserted: uid 0 pid 27909 ]
+@2 pass in quick inet proto tcp from 10.7.5.201 to any port = 3001 flags S/SA keep state
+  [ Owner : nil          Priority : 0     ]
+  [ Evaluations: 9324      Packets: 38        Bytes: 4029        States: 1     ]
+  [ Inserted: uid 0 pid 27909 ]
+@3 block drop in quick proto tcp from any to any port = 3001
+  [ Owner : nil          Priority : 0     ]
+  [ Evaluations: 11778     Packets: 6         Bytes: 384         States: 0     ]
+  [ Inserted: uid 0 pid 27909 ]

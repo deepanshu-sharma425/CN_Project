@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "asOf": "2026-11-23T20:42:00+05:30",
+  "asOf": "2026-11-23T20:50:00+05:30",
   "source": "Coordinator (Kanishk, Mac 3): S0 inventory and CP1 completed; screenshots relayed from Macs 1, 2, 4.",
   "currentStage": "S4",
   "nextMilestone": "S4 (Extension C): pf baseline, strict rules on Mac 3 and Mac 4, allowed/blocked proofs, rollback test, edge-tier",
@@ -96,7 +96,13 @@
     "S3-clients": "Passed",
     "S3-stop": "Passed",
     "S3-capture": "Passed",
-    "S3-dnsvsapp": "Passed"
+    "S3-dnsvsapp": "Passed",
+    "S4-m3-baseline": "Passed",
+    "S4-m3-strict": "Passed",
+    "S4-m4": "Passed",
+    "S4-blocked": "Passed",
+    "S4-allowed": "Passed",
+    "S4-edgetier": "In progress"
   },
   "requirements": {
     "P1-A1": {
@@ -229,13 +235,19 @@
       "status": "not-started"
     },
     "P2-C1": {
-      "status": "not-started"
+      "status": "verified",
+      "evidence": "MAC_3/evidence/phase2/S4-02-strict-loaded-token-counters.png; MAC_4/evidence/phase2/S4-02-rules-loaded-counters.png",
+      "note": "pf anchor com.apple/nova on Mac 3 and Mac 4; only Mac 2 (+ the Mac itself via lo0) reaches 3001/3002"
     },
     "P2-C2": {
-      "status": "not-started"
+      "status": "verified",
+      "evidence": "MAC_2/evidence/phase2/S4-01-allowed-from-edge.png; MAC_1/evidence/phase2/S4-01-blocked-from-mac1.png; MAC_3/evidence/phase2/S4-03-tests-and-counters.png; MAC_4/evidence/phase2/S4-03-tests-and-counters.png; MAC_3/evidence/phase2/S4-04-block-counter-and-rollback.png",
+      "note": "Mac 2 → 200 direct; Mac 1/3/4 → Operation timed out; block rule Packets 6 (Mac 3) / 4 (Mac 4); self traffic matched the lo0 rule"
     },
     "P2-C3": {
-      "status": "not-started"
+      "status": "verified",
+      "evidence": "MAC_3/evidence/phase2/S4-04-block-counter-and-rollback.png; MAC_4/evidence/phase2/S4-04-rollback-pf-still-enabled.png; MAC_1/evidence/phase2/S4-02-after-rollback-ports-open.png; MAC_3/firewall/ROLLBACK.md",
+      "note": "rollback restored each Mac to its own baseline (Mac 3 Disabled, Mac 4 still Enabled); Mac 1 then connected (negative control)"
     },
     "P2-D1": {
       "status": "verified",
@@ -288,6 +300,7 @@
     "D3": "historical"
   },
   "findings": [
-    "dnsmasq answers AAAA app.nova.test with NXDOMAIN because of local=/nova.test/; to be fixed in S7 (TTL step)"
+    "dnsmasq answers AAAA app.nova.test with NXDOMAIN because of local=/nova.test/; to be fixed in S7 (TTL step)",
+    "pf sees a Mac connecting to its own LAN IP on lo0 (self-IP rule never matched; lo0 rule did)"
   ]
 }

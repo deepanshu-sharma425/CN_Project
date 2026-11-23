@@ -1,0 +1,17 @@
+=== MAC3 S4 edge-tier 20:48:52
+mac2 = "10.7.5.201"     # primary edge
+mac3 = "10.7.1.218"     # this Mac (self)
+mac4 = "10.7.27.160"     # standby edge
+pass  in quick on lo0 all
+pass  in quick proto tcp from $mac3 to any port 3001
+pass  in quick proto tcp from { $mac2, $mac4 } to any port 3001
+block drop in quick proto tcp from any to any port 3001
+edge-tier loaded
+--- enable (NEW TOKEN)
+pf enabled
+Token : 14918833353710140916
+pass in quick on lo0 all flags S/SA keep state
+pass in quick inet proto tcp from 10.7.1.218 to any port = 3001 flags S/SA keep state
+pass in quick inet proto tcp from 10.7.5.201 to any port = 3001 flags S/SA keep state
+pass in quick inet proto tcp from 10.7.27.160 to any port = 3001 flags S/SA keep state
+block drop in quick proto tcp from any to any port = 3001

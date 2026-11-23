@@ -1,0 +1,28 @@
+=== MAC3 S4 load strict 23 Nov 2026 20:44:15
+rules loaded into com.apple/nova
+--- enable (SAVE THE TOKEN)
+pf enabled
+Token : 602002873809259130
+--- status
+Status: Enabled for 0 days 00:00:00           Debug: Urgent
+--- our anchor present?
+  com.apple/200.AirDrop
+  com.apple/250.ApplicationFirewall
+  com.apple/nova
+--- counters BEFORE tests
+@0 pass in quick on lo0 all flags S/SA keep state
+  [ Owner : nil          Priority : 0     ]
+  [ Evaluations: 0         Packets: 0         Bytes: 0           States: 0     ]
+  [ Inserted: uid 0 pid 27909 ]
+@1 pass in quick inet proto tcp from 10.7.1.218 to any port = 3001 flags S/SA keep state
+  [ Owner : nil          Priority : 0     ]
+  [ Evaluations: 0         Packets: 0         Bytes: 0           States: 0     ]
+  [ Inserted: uid 0 pid 27909 ]
+@2 pass in quick inet proto tcp from 10.7.5.201 to any port = 3001 flags S/SA keep state
+  [ Owner : nil          Priority : 0     ]
+  [ Evaluations: 0         Packets: 0         Bytes: 0           States: 0     ]
+  [ Inserted: uid 0 pid 27909 ]
+@3 block drop in quick proto tcp from any to any port = 3001
+  [ Owner : nil          Priority : 0     ]
+  [ Evaluations: 0         Packets: 0         Bytes: 0           States: 0     ]
+  [ Inserted: uid 0 pid 27909 ]

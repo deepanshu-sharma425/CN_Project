@@ -1,0 +1,5 @@
+=== MAC3 S4 rollback 20:48:01
+pf disabled
+--- our anchor (should be empty)
+--- status (should be Disabled, like baseline)
+Status: Disabled for 0 days 00:00:00          Debug: Urgent
