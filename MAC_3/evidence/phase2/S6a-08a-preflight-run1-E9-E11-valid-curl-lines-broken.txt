@@ -1,0 +1,47 @@
+=== S6a preflight E1-E11 from Mac 3 (10.7.1.218) 23 Nov 2026 22:18:46
+E1 (Mac 4 nginx -t ok, *:443 listening): see S6a-07-standby-edge-started.png
+E2 cert checks: cert pubkey hash = key hash = 2dcda60a... (S6a-05, S6a-07)
+E3 /api/status code + ssl_verify_result: curl: option --resolve app.nova.test:443:10.7.27.160: is unknown
+curl: try 'curl --help' or 'curl --manual' for more information
+E4 headers:
+curl: option --resolve app.nova.test:443:10.7.27.160: is unknown
+curl: try 'curl --help' or 'curl --manual' for more information
+
+E5 / : curl: option --resolve app.nova.test:443:10.7.27.160: is unknown
+curl: try 'curl --help' or 'curl --manual' for more information
+E6 six requests X-Backend: curl: option --resolve app.nova.test:443:10.7.27.160: is unknown
+curl: try 'curl --help' or 'curl --manual' for more information
+curl: option --resolve app.nova.test:443:10.7.27.160: is unknown
+curl: try 'curl --help' or 'curl --manual' for more information
+curl: option --resolve app.nova.test:443:10.7.27.160: is unknown
+curl: try 'curl --help' or 'curl --manual' for more information
+curl: option --resolve app.nova.test:443:10.7.27.160: is unknown
+curl: try 'curl --help' or 'curl --manual' for more information
+curl: option --resolve app.nova.test:443:10.7.27.160: is unknown
+curl: try 'curl --help' or 'curl --manual' for more information
+curl: option --resolve app.nova.test:443:10.7.27.160: is unknown
+curl: try 'curl --help' or 'curl --manual' for more information
+
+curl: option --resolve app.nova.test:443:10.7.27.160: is unknown
+curl: try 'curl --help' or 'curl --manual' for more information
+E7 ETag from backend : 
+curl: option --resolve app.nova.test:443:10.7.27.160: is unknown
+curl: try 'curl --help' or 'curl --manual' for more information
+
+curl: option --resolve app.nova.test:443:10.7.27.160: is unknown
+curl: try 'curl --help' or 'curl --manual' for more information
+
+E8 security verify-cert: Unable to find at least 2 signed certificate timestamps (SCTs) from approved logs
+E9 Mac 4 vs Mac 2 certificate:
+  10.7.27.160
+    sha256 Fingerprint=92:16:48:50:80:20:00:5D:33:A1:AF:DD:A1:6D:F9:6D:1A:A9:B0:D5:75:B9:E2:72:25:86:F9:A8:36:3C:73:7E
+    issuer=O=mkcert development CA, OU=deepanshu.@Deepanshus-MacBook-Pro-3.local (Deepanshu .), CN=mkcert deepanshu.@Deepanshus-MacBook-Pro-3.local (Deepanshu .)
+  10.7.5.201
+    sha256 Fingerprint=2F:C5:31:CE:B7:B9:F4:16:37:4C:05:C5:A9:1F:67:2D:C7:C2:B9:F9:11:8F:24:85:F9:9D:57:AD:21:F3:EE:52
+    issuer=O=mkcert development CA, OU=deepanshu.@Deepanshus-MacBook-Pro-3.local (Deepanshu .), CN=mkcert deepanshu.@Deepanshus-MacBook-Pro-3.local (Deepanshu .)
+E10 HTTP/2: E11 Mac 2 edge still unchanged:
+HTTP/2 200 
+x-backend: A
+x-edge: mac2
+    DNS still -> 10.7.5.201
+    backup DNS -> 10.7.5.201
