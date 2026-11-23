@@ -9,3 +9,4 @@ build() {  # html source, pdf output
 }
 build report.html      Team_Nova_Phase1_Report.pdf
 build demo_report.html Team_Nova_Demo_Report.pdf
+build phase2_report.html Team_Nova_Phase2_Report.pdf
