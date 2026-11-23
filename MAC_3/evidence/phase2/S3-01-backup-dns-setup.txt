@@ -1,0 +1,130 @@
+=== MAC3 S3 backup DNS setup 23 Nov 2026 20:26
+--- port 53 free? (nothing below = free)
+==> Auto-updating Homebrew...
+Adjust how often this is run with `$HOMEBREW_AUTO_UPDATE_SECS` or disable with
+`$HOMEBREW_NO_AUTO_UPDATE=1`. Hide these hints with `$HOMEBREW_NO_ENV_HINTS=1` (see `man brew`).
+==> Downloading https://ghcr.io/v2/homebrew/core/portable-ruby/blobs/sha256:832729e175b3c0864c8417ebc2bdcf1509e3856a08bd866c8bb0de806da6964e
+##O=- #      #                                                                                                                                                                                                       #=O#-   #       #                                                                                                                                                                                                    #########                                                                                                                                                                                                        4.5%######################################################                                                                                                                                                          26.3%#########################################################################################################################################                                                                       66.8%############################################################################################################################################################################################################## 100.0%
+==> Pouring portable-ruby-4.0.10.arm64_big_sur.bottle.tar.gz
+==> Auto-updated Homebrew!
+Updated 4 taps (mongodb/brew, steipete/tap, homebrew/core and homebrew/cask).
+==> New Formulae
+ade: Graph construction, manipulation, and processing framework
+apicula: Open source tools for Gowin FPGAs
+dezoomify-cli: Download zoomable images from museum websites, image galleries, and map viewers
+gtk4-layer-shell: GTK4 library to create desktop components using the Layer Shell Wayland protocol
+jotter: Jupyter notebook TUI with Vim keys, inline plots and rendered LaTeX
+libpkl: C library calling into Pkl's message passing API
+nextpnr-himbaechel: Portable FPGA place and route tool for Gowin FPGAs
+oscar64: C/C++ cross-compiler, assembler, and runtime for Commodore 64 and 6502
+php@8.5: General-purpose scripting language
+postgresql@19: Object-relational database system
+==> New Casks
+alfred@5: Application launcher and productivity software
+blave: Algorithmic trading and backtesting app using AI agents
+byos: Companion app for Byos Secure Edge devices
+clipboard-remote: Share clipboard contents between devices over a local network
+codeql-bundle: Semantic code analysis engine with precompiled standard query packs
+font-chunkfive
+font-dinish
+font-lucide: Lucide icons as a TrueType font
+gallery-remote: Present photo slideshows on devices over a local network
+hyprmac: Tiling window manager
+jellybox: Music player for Jellyfin, Navidrome and Emby servers
+lap: Local-first photo manager
+lumo: AI assistant
+max-messages: Archive and browse conversations from the Messages app
+mistral-vibe-app: AI chat and coding agent
+multidock: Extra panels for apps, files and folders
+octo-browser: Anti-detect browser for managing multiple profiles
+screenshot-remote: Capture screenshots on remote computers over a local network
+search-browser: WebKit-based web browser
+setshot: Snapshot and diff system settings changes
+shellrs: SSH and SFTP client
+smartgit@preview: Git client
+speedcrunch: Scientific calculator
+supertab: Switcher panel for apps, windows, clipboard history and files
+swi-prolog-app: ISO/Edinburgh-style Prolog interpreter
+upload-remote: Transfer files between devices over a local network
+velaterm: Terminal multiplexer and agentic development environment for AI coding agents
+weftcut: Video editor controlled from MCP clients
+zephium: WebKit-based browser with built-in AI tools
+
+You have 38 outdated formulae and 1 outdated cask installed.
+
+Warning: The following taps are not trusted:
+  mongodb/brew
+
+Homebrew is currently ignoring formulae, casks and commands
+from these taps because tap trust is required.
+Prefer trusting only the specific formulae, casks or commands you need.
+Trust installed formulae from these taps with:
+  brew trust --formula mongodb/brew/mongodb-community mongodb/brew/mongodb-database-tools
+Trust other specific casks and commands with:
+  brew trust --cask <user>/<tap>/<cask>
+  brew trust --command <user>/<tap>/<command>
+Whole-tap trust is broader and includes all current and future formulae,
+casks and commands from the listed taps. Trust whole taps with:
+  brew trust mongodb/brew
+Untap them with:
+  brew untap mongodb/brew
+For more information, see:
+  https://docs.brew.sh/Tap-Trust
+
+==> Downloading bottle manifests
+✔︎ Bottle Manifest dnsmasq (2.93)
+==> Fetching downloads for: dnsmasq
+✔︎ Bottle dnsmasq (2.93)
+==> Pouring dnsmasq--2.93.arm64_golden_gate.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/dnsmasq/2.93: 13 files, 710.3KB
+==> Caveats
+==> dnsmasq
+On current macOS releases, `/etc/resolver/<domain>` resolver overrides do not work if the nameserver is `127.0.0.1` and dnsmasq is running on a non-53 port.
+To use scoped resolver zones reliably, bind dnsmasq to a non-localhost IP (e.g., a loopback alias like 10.0.0.1) on port 53.
+
+To start dnsmasq now and restart at startup:
+  sudo brew services start dnsmasq
+Or, if you don't want/need a background service you can just run:
+  /opt/homebrew/opt/dnsmasq/sbin/dnsmasq --keep-in-foreground -C /opt/homebrew/etc/dnsmasq.conf -7 /opt/homebrew/etc/dnsmasq.d,\*.conf
+backup saved
+--- project lines
+692:address=/app.nova.test/10.7.5.201
+693:address=/api.nova.test/10.7.5.201
+694:listen-address=127.0.0.1,10.7.1.218
+695:no-resolv
+696:server=8.8.8.8
+697:local=/nova.test/
+698:log-queries=extra
+699:log-facility=/opt/homebrew/var/log/dnsmasq-nova.log
+--- syntax
+dnsmasq: syntax check OK.
+Warning: Taking root:admin ownership of some dnsmasq paths:
+  /opt/homebrew/Cellar/dnsmasq/2.93/sbin
+  /opt/homebrew/Cellar/dnsmasq/2.93/sbin/dnsmasq
+  /opt/homebrew/opt/dnsmasq
+  /opt/homebrew/opt/dnsmasq/sbin
+  /opt/homebrew/var/homebrew/linked/dnsmasq
+This will require manual removal of these paths using `sudo rm` on
+brew upgrade/reinstall/uninstall.
+Root services will run Homebrew-installed software as root by default. Only use
+root services if you trust all users who can write to your Homebrew installation.
+==> Successfully started `dnsmasq` (label: sh.brew.dnsmasq)
+--- service
+dnsmasq       started         root /Library/LaunchDaemons/sh.brew.dnsmasq.plist
+--- listening
+COMMAND   PID   USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+dnsmasq 25115 nobody    4u  IPv4 0xb712d8f28356cf16      0t0  UDP 10.7.1.218:53
+dnsmasq 25115 nobody    6u  IPv4 0xadbc4c3999ccf0ae      0t0  UDP 127.0.0.1:53
+--- answer from Mac 3
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 37713
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+; EDNS: version: 0, flags:; udp: 1232
+app.nova.test.		0	IN	A	10.7.5.201
+--- internet name via Mac 3
+104.20.23.154
+172.66.147.243
+--- query log
+Nov 23 20:26:51 dnsmasq[25115]: 2 10.7.1.218/59867 query[A] example.com from 10.7.1.218
+Nov 23 20:26:51 dnsmasq[25115]: 2 10.7.1.218/59867 forwarded example.com to 8.8.8.8
+Nov 23 20:26:51 dnsmasq[25115]: 2 10.7.1.218/59867 reply example.com is 104.20.23.154
+Nov 23 20:26:51 dnsmasq[25115]: 2 10.7.1.218/59867 reply example.com is 172.66.147.243

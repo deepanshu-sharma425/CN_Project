@@ -1,0 +1,13 @@
+=== T2 PHASE 1 clean run, client = Mac 3 (10.7.1.218), 23 Nov 2026 20:23:16
+--- guard: live config (Phase 1 baseline has no x-edge header)
+HTTP/2 200 
+x-backend: A
+Backend A pid 21094
+A frozen 20:23:16
+20:23:16 request 1 -> 200 0.148678s served-by=B
+20:23:17 request 2 -> 200 60.126685s served-by=B
+20:24:17 request 3 -> 200 0.088313s served-by=B
+20:24:17 request 4 -> 200 0.042918s served-by=B
+A resumed 20:24:17
+  PID STAT COMMAND
+21094 SN   node server.js

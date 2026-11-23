@@ -1,9 +1,9 @@
 {
   "schema": 1,
-  "asOf": "2026-11-23T20:08:00+05:30",
+  "asOf": "2026-11-23T20:30:00+05:30",
   "source": "Coordinator (Kanishk, Mac 3): S0 inventory and CP1 completed; screenshots relayed from Macs 1, 2, 4.",
-  "currentStage": "S2",
-  "nextMilestone": "S2: T2 timing test (Phase 1 baseline vs Phase 2 config, Backend A frozen)",
+  "currentStage": "S3",
+  "nextMilestone": "S3 Part B: stop Mac 1 dnsmasq and prove clients resolve through Mac 3 (capture + Mac 3 query log)",
   "inventory": {
     "mac1": {
       "ip": "10.7.22.124",
@@ -87,7 +87,12 @@
     "S2-docdemo": "Passed",
     "S1-onebackend": "Passed",
     "S1-bothdown": "Passed",
-    "S1-errlog": "Passed"
+    "S1-errlog": "Passed",
+    "S2-T2": "Passed",
+    "S2-freeze": "Passed",
+    "S3-install": "Passed",
+    "S3-mac1cfg": "Passed",
+    "S2-spof": "In progress"
   },
   "requirements": {
     "P1-A1": {
@@ -187,10 +192,14 @@
       "note": "DNS, backends, load balancing and TLS re-verified; S1 items pending"
     },
     "P2-A1": {
-      "status": "not-started"
+      "status": "verified",
+      "evidence": "MAC_3/evidence/phase2/S3-01-backup-dns-setup.txt; MAC_3/backup_dns/dnsmasq-nova-backup.conf",
+      "note": "dnsmasq 2.93 on Mac 3, NOERROR aa 10.7.5.201"
     },
     "P2-A2": {
-      "status": "not-started"
+      "status": "partial",
+      "evidence": "MAC_1/evidence/phase2/S3-01-primary-forwarding-and-log.png; MAC_2/evidence/phase2/S3-02-client-dns-both-servers.png",
+      "note": "Mac 1 and Mac 2 list both servers; Mac 3 and Mac 4 pending"
     },
     "P2-A3": {
       "status": "not-started"
@@ -235,10 +244,13 @@
       "note": "A reappears within the 10 s fail_timeout window"
     },
     "P2-D4": {
-      "status": "not-started"
+      "status": "partial",
+      "note": "SPOF (Mac 2 nginx) explained; demonstrated by Extension E later"
     },
     "P2-D5": {
-      "status": "not-started"
+      "status": "verified",
+      "evidence": "project-management/results/T2-frozen-backend-timing.md",
+      "note": "T2: 60.13 s (Phase 1) vs 5.25 s / 5.56 s (Phase 2); T3 still to run in S5"
     },
     "P2-E1": {
       "status": "not-started"
